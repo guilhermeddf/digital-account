@@ -1,0 +1,10 @@
+
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:9.6.8:///digital-account-service
+    username: digital-account-service-app
+    password: digital-account-service-app
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: update
