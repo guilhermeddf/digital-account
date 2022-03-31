@@ -5,3 +5,5 @@ O projeto possui testes de sistema utilizando o rest assured, para executar esse
 
 Tentei utitilizar DDD na arquitetura, mas ainda existem referencias ao spring dentro do dominio, a solução para resolver esse problema está aqui: https://www.baeldung.com/hexagonal-architecture-ddd-spring,
 Mas não fiz :(.
+
+A applicaçao tem swagger, pode ser consultado atraves do caminho: localhost:8080/swagger-ui.html
