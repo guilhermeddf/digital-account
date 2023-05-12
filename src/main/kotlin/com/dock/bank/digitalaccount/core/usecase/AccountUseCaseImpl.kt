@@ -8,6 +8,8 @@ import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
 import com.dock.bank.digitalaccount.core.port.adapter.AccountUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
+import com.dock.bank.digitalaccount.infra.gateway.AccountGateway
+import com.dock.bank.digitalaccount.infra.sqs.SQSProducer
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -16,17 +18,27 @@ import java.util.UUID
 class AccountUseCaseImpl(
     private val accountPersistence: AccountPersistence,
     private val holderPersistence: HolderPersistence,
-    private val accountGenerator: AccountGenerator
+    private val accountGenerator: AccountGenerator,
+    private val accountGateway: AccountGateway,
+    private val producer: SQSProducer
 ) : AccountUseCase {
 
     companion object {
         private val logger = LoggerFactory.getLogger(AccountUseCaseImpl::class.java)
     }
 
-    override suspend fun create(holderCpf: String): Account {
-        val storedHolder = retrieveHolder(holderCpf)
-        logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
-        return accountPersistence.create(accountGenerator.generateAccount(storedHolder))
+    override suspend fun create(holderCpf: String, test: Boolean): Account {
+        return if (test) {
+            logger.info("Using account fake generator.")
+            val storedHolder = retrieveHolder(holderCpf)
+            logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
+            val account = accountPersistence.create(accountGenerator.generateAccount(storedHolder))
+            producer.sendMessage(account.toString())
+            return account
+        } else {
+            logger.info("Using account gateway.")
+            accountGateway.createAccount(holderCpf)
+        }
     }
 
     override suspend fun disable(id: UUID, status: Status) : Boolean {

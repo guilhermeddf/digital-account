@@ -6,7 +6,6 @@ import com.dock.bank.digitalaccount.core.domain.Transaction
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateAccountResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderRequest
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderResponse
-import com.dock.bank.digitalaccount.infra.rest.dto.CreateTransactionRequest
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateTransactionResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.GetAccountResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.RetrieveTransactionResponse
@@ -34,6 +33,7 @@ fun Account.toCreateResponse() : CreateAccountResponse {
         number = this.number,
         branch = this.branch,
         holderName = this.holder.name,
+        cpf = this.holder.cpf,
         status = this.status
     )
 }

@@ -10,6 +10,7 @@ data class CreateAccountResponse(
     val number: String,
     val branch: String,
     val holderName: String,
+    val cpf: String,
     val status: Status
 )
 

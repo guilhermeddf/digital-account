@@ -6,3 +6,18 @@ spring:
     password: digital-account-service-app
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: us-east-1
+    credentials:
+      access-key: dummy
+      secret-key: dummy
+    end-point:
+      uri: http://localhost:4566/000000000000/my-queue
+      queue-name: my-queue
+    profile: localstack
+
