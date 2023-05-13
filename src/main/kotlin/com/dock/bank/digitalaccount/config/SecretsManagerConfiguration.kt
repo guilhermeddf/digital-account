@@ -1,6 +1,11 @@
 package com.dock.bank.digitalaccount.config
 
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.client.builder.AwsClientBuilder
+import com.amazonaws.services.secretsmanager.AWSSecretsManager
+import com.amazonaws.services.secretsmanager.AWSSecretsManagerAsyncClientBuilder
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,12 +22,10 @@ class SecretsManagerConfiguration(
     @Value("\${cloud.aws.sqs.end-point.uri}") private val sqsUrl: String
 ) {
 
-    @Bean
-    fun amazonSM(): SecretsManagerClient {
-        return SecretsManagerClient.builder()
-            .region(Region.of(region))
-            .credentialsProvider(ProfileCredentialsProvider.builder().profileName("localstack").build())
-            .endpointOverride(URI.create(sqsUrl))
-            .build()
+    fun amazonSM(): AWSSecretsManager {
+       return AWSSecretsManagerAsyncClientBuilder.standard()
+           .withCredentials(AWSStaticCredentialsProvider(BasicAWSCredentials(accessKeyId, secretAccessKey)))
+           .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
+           .build()
     }
 }
