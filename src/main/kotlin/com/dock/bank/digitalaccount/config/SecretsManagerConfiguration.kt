@@ -1,14 +1,13 @@
 package com.dock.bank.digitalaccount.config
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider
-import com.amazonaws.auth.BasicAWSCredentials
-import com.amazonaws.client.builder.AwsClientBuilder
-import com.amazonaws.services.secretsmanager.AWSSecretsManager
-import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder
+
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Primary
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider
+import software.amazon.awssdk.regions.Region
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient
+import java.net.URI
 
 @Configuration
 class SecretsManagerConfiguration(
@@ -19,10 +18,11 @@ class SecretsManagerConfiguration(
 ) {
 
     @Bean
-    fun amazonSM(): AWSSecretsManager? {
-        return AWSSecretsManagerClientBuilder.standard()
-            .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
-            .withCredentials(AWSStaticCredentialsProvider(BasicAWSCredentials(accessKeyId, secretAccessKey)))
+    fun amazonSM(): SecretsManagerClient {
+        return SecretsManagerClient.builder()
+            .region(Region.of(region))
+            .credentialsProvider(ProfileCredentialsProvider.builder().profileName("localstack").build())
+            .endpointOverride(URI.create(sqsUrl))
             .build()
     }
 }

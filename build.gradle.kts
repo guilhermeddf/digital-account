@@ -43,7 +43,8 @@ dependencies {
 
 	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
 	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
-	implementation("io.awspring.cloud:spring-cloud-starter-aws-secrets-manager-config:2.4.4")
+	implementation("software.amazon.awssdk:secretsmanager:2.20.65")
+	implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.468")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.12.0")
@@ -55,9 +56,6 @@ dependencies {
 	testImplementation("io.rest-assured:rest-assured:4.5.1")
 	testImplementation ("io.rest-assured:json-path:4.5.1")
 	testImplementation ("io.rest-assured:xml-path:4.5.1")
-
-
-
 }
 
 dependencyManagement {
