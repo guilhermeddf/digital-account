@@ -2,6 +2,7 @@ package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.port.adapter.AccountUseCase
+import com.dock.bank.digitalaccount.infra.credentials.CredentialsManager
 import com.dock.bank.digitalaccount.infra.rest.converter.toCreateResponse
 import com.dock.bank.digitalaccount.infra.rest.converter.toGetResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateAccountResponse
@@ -19,11 +20,14 @@ import java.util.UUID
 @RestController
 @RequestMapping("/accounts")
 class AccountController(
-    private val accountUseCase: AccountUseCase
+    private val accountUseCase: AccountUseCase,
+    private val credentialsManager: CredentialsManager
 ) {
 
     @GetMapping("/{id}")
-    suspend fun get(@PathVariable id: UUID) : GetAccountResponse {
+    suspend fun get(@PathVariable id: UUID, @RequestHeader("api-id") apiId: String) : GetAccountResponse {
+        val result = credentialsManager.getCredentials(apiId)
+        println(result)
         return accountUseCase.get(id).toGetResponse()
     }
 

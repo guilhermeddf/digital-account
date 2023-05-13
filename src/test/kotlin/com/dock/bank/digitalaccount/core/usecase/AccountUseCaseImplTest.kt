@@ -61,7 +61,7 @@ class AccountUseCaseImplTest {
             coEvery { accountPersistence.create(any()) } returns fakeAccount
             coEvery { accountGenerator.generateAccount(any()) } returns fakeAccount
 
-            accountUseCase.create(holderCpf)
+            accountUseCase.create(holderCpf, false)
 
             coVerify (exactly = 1) { holderPersistence.findByCpf(holderCpf) }
 

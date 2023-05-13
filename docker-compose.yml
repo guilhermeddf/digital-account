@@ -3,7 +3,7 @@ version: "3.4"
 services:
 
   localstack:
-    container_name: aws_sqs
+    container_name: aws_stack
     image: localstack/localstack
     ports:
       - "4566:4566"
@@ -12,7 +12,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=dummy
       - AWS_DEFAULT_REGION=us-east-1
       - AWS_DEFAULT_OUTPUT=json
-      - SERVICES=sqs
+      - SERVICES=sqs,s3
     volumes:
       - ./local/aws/sqs-configuration.sh:/etc/localstack/init/ready.d/init-aws.sh
 

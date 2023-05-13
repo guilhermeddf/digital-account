@@ -19,8 +19,6 @@ class TransactionPersistenceImpl(
          return transactionRepository.save(transaction.toTable()).toEntity()
     }
 
-
-
     override suspend fun getTransactions(
         startDate: LocalDate,
         finishDate: LocalDate,

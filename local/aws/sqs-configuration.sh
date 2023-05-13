@@ -8,14 +8,33 @@ aws configure set region us-east-1 --profile=localstack
 echo " Setting default profile "
 export AWS_DEFAULT_PROFILE=localstack
 
-echo " Setting SQS names as env variables "
-export TEST_SQS=my-queue
+#echo " Creating queues "
+#aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name $TEST_SQS
 
-echo " Creating queues "
-aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name $TEST_SQS
+#echo " Listing queues "
+#aws --endpoint-url=http://localhost:4566 sqs list-queues
 
-echo " Listing queues "
-aws --endpoint-url=http://localhost:4566 sqs list-queues
+
+
+#echo ### Criando Chaves no AWS Parameter Store do LocalStack...
+#aws --endpoint http://localhost:4566 --profile localstack ssm put-parameter --name "/config/spring-boot-localstack_localstack/helloWorld" --value "Hello World Parameter Store" --type String
+#aws --endpoint http://localhost:4566 --profile localstack ssm put-parameter --name "/config/spring-boot-localstack_localstack/sqsQueueName" --value "process-queue" --type String
+#aws --endpoint http://localhost:4566 --profile localstack ssm put-parameter --name "/config/spring-boot-localstack_localstack/s3Bucket" --value "process-storage" --type String
+
+echo ### Criando Segredos no AWS Secret Manager do LocalStack...
+aws --endpoint http://localhost:4566 --profile localstack secretsmanager create-secret --name process-secrets-manager --description "Exemplo de Secrets Manager" --secret-string "{\"user\":\"guilhermeddf\",\"password\":\"1234\"}"
+
+echo ### Criando Bucket no S3 do LocalStack...
+aws --endpoint http://localhost:4566 --profile localstack s3 mb s3://process-storage
+
+echo ### Criando Queue(Standard) no SQS do LocalStack...
+aws --endpoint http://localhost:4566 --profile localstack sqs create-queue --queue-name process-queue
+#aws --endpoint http://localhost:4566 --profile localstack sqs send-message --queue-url http://localhost:4566/000000000000/sqsHelloWorld --message-body "Hello World SQS!!!" --delay-seconds 1
+#aws --endpoint http://localhost:4566 --profile localstack sqs receive-message --queue-url http://localhost:4566/000000000000/sqsHelloWorld
+
+#echo ### Criando Queue(Standard) no SNS do LocalStack...
+#aws --endpoint http://localhost:4566 --profile localstack sns create-topic --name snsHelloWorld
+#aws --endpoint http://localhost:4566 --profile localstack sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:snsHelloWorld --protocol sqs --notification-endpoint arn:aws:sqs:us-east-1:000000000000:sqsHelloWorld
 
 
 

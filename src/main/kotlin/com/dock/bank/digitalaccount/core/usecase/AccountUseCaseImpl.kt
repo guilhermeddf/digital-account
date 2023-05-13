@@ -8,8 +8,9 @@ import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
 import com.dock.bank.digitalaccount.core.port.adapter.AccountUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
+import com.dock.bank.digitalaccount.core.port.queue.QueueProducer
 import com.dock.bank.digitalaccount.infra.gateway.AccountGateway
-import com.dock.bank.digitalaccount.infra.sqs.SQSProducer
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -20,7 +21,8 @@ class AccountUseCaseImpl(
     private val holderPersistence: HolderPersistence,
     private val accountGenerator: AccountGenerator,
     private val accountGateway: AccountGateway,
-    private val producer: SQSProducer
+    private val producer: QueueProducer,
+    private val objectMapper: ObjectMapper
 ) : AccountUseCase {
 
     companion object {
@@ -33,7 +35,8 @@ class AccountUseCaseImpl(
             val storedHolder = retrieveHolder(holderCpf)
             logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
             val account = accountPersistence.create(accountGenerator.generateAccount(storedHolder))
-            producer.sendMessage(account.toString())
+            val accountString = objectMapper.writeValueAsString(account)
+            producer.publish(accountString)
             return account
         } else {
             logger.info("Using account gateway.")

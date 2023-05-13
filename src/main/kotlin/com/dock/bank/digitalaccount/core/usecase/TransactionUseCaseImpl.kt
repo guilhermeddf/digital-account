@@ -26,7 +26,6 @@ class TransactionUseCaseImpl(
 
         return if (TransactionType.DEBIT == transaction.type) {
 
-            //TODO ISSO AQUI PODE ESTAR DENTRO DO FACTORY E DO DOMAIN DE TRANSACTION OU AQUI MESMO?
             val dailyDebitSum = getDailyDebitTransactionSum(
                 date = DateUtils.getLocalDate(transaction.createdDate),
                 account = transaction.account,

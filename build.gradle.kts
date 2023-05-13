@@ -40,7 +40,10 @@ dependencies {
 
 	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.467")
 	implementation("software.amazon.awssdk:sqs:2.20.64")
-	implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
+
+	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+	implementation("io.awspring.cloud:spring-cloud-starter-aws-secrets-manager-config:2.4.4")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.12.0")
