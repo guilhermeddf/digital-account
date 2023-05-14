@@ -1,6 +1,7 @@
 package com.dock.bank.digitalaccount.core.usecase
 
 import com.dock.bank.digitalaccount.core.domain.Account
+import com.dock.bank.digitalaccount.core.domain.Credentials
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
@@ -56,7 +57,10 @@ class AccountUseCaseImpl(
         return accountPersistence.enable(id, status)
     }
 
-    override suspend fun get(id: UUID): Account {
+    override suspend fun get(id: UUID, credentials: Credentials): Account {
+        if(credentials.user != "guilhermeddf" || credentials.password != "1234") {
+            throw Exception("Authorization error.")
+        }
         return accountPersistence.get(id).orElseThrow {
             throw ResourceNotFoundException(message = "Account not found.")
         }

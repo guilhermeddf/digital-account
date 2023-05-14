@@ -18,12 +18,14 @@ class SQSProducerImpl(
     }
 
     override suspend fun publish(message: String) {
-
-        val sendMessage = SendMessageRequest()
-            .withQueueUrl(sqsUrl)
-            .withMessageBody(message)
-
-        awsSQS.sendMessage(sendMessage)
-        logger.info("Message publish with success. Message: $message")
+        try {
+            val sendMessage = SendMessageRequest()
+                .withQueueUrl(sqsUrl)
+                .withMessageBody(message)
+            awsSQS.sendMessage(sendMessage)
+            logger.info("Message publish with success. Message: $message")
+        } catch (e: Exception){
+            throw Exception("Error trying to publish queue message.", e)
+        }
     }
 }

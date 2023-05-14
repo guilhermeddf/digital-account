@@ -32,12 +32,17 @@ class SQSConfiguration(
         return factory
     }
 
+
     @Bean
     @Primary
-    fun amazonSQS(): AmazonSQSAsync? {
-        return AmazonSQSAsyncClientBuilder.standard()
-            .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
-            .withCredentials(AWSStaticCredentialsProvider(BasicAWSCredentials(accessKeyId, secretAccessKey)))
-            .build()
+    fun amazonSQS(): AmazonSQSAsync {
+        try {
+            return AmazonSQSAsyncClientBuilder.standard()
+                .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
+                .withCredentials(AWSStaticCredentialsProvider(BasicAWSCredentials(accessKeyId, secretAccessKey)))
+                .build()
+        } catch (e: Exception){
+            throw Exception("Error trying to configure AWS SQS.", e)
+        }
     }
 }

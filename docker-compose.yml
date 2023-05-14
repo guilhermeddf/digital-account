@@ -14,7 +14,7 @@ services:
       - AWS_DEFAULT_OUTPUT=json
       - SERVICES=sqs,s3
     volumes:
-      - ./local/aws/sqs-configuration.sh:/etc/localstack/init/ready.d/init-aws.sh
+      - ./local/aws/aws-configuration.sh:/etc/localstack/init/ready.d/init-aws.sh
 
   flyway:
     image: flyway/flyway:7.14-alpine

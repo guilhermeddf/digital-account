@@ -4,8 +4,6 @@ package com.dock.bank.digitalaccount.infra.rest.controllers
 import com.dock.bank.digitalaccount.config.BaseTestConfig
 import com.dock.bank.digitalaccount.core.exceptions.ErrorMessage
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
-import com.dock.bank.digitalaccount.infra.database.HolderPersistenceImpl
-import com.dock.bank.digitalaccount.infra.database.repository.HolderRepository
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderResponse
 import com.dock.bank.digitalaccount.utils.buildCreateHolderRequest
 import com.dock.bank.digitalaccount.utils.cpfGenerator
@@ -17,11 +15,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
-import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.function.Executable

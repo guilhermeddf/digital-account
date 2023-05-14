@@ -26,9 +26,8 @@ class AccountController(
 
     @GetMapping("/{id}")
     suspend fun get(@PathVariable id: UUID, @RequestHeader("api-id") apiId: String) : GetAccountResponse {
-        val result = credentialsManager.getCredentials(apiId)
-        println(result)
-        return accountUseCase.get(id).toGetResponse()
+        val credentials = credentialsManager.getCredentials(apiId)
+        return accountUseCase.get(id, credentials).toGetResponse()
     }
 
     @PostMapping

@@ -3,15 +3,11 @@ package com.dock.bank.digitalaccount.infra.storage
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.*
-import com.dock.bank.digitalaccount.config.S3Configuration
 import com.dock.bank.digitalaccount.core.port.storage.FileStorage
 import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.ResourceLoader
-import org.springframework.core.io.support.ResourcePatternResolver
 import org.springframework.stereotype.Component
-import software.amazon.awssdk.core.exception.SdkClientException
 import java.io.*
 
 
@@ -47,10 +43,10 @@ class S3Connection(
                 }
                 return result.toString()
             } catch (e: IOException) {
-                throw Exception("Error reading S3 content", e)
+                throw Exception("Error reading S3 content.", e)
             }
         } catch (e: AmazonS3Exception) {
-            throw Exception("Error connection to s3 storage.", e)
+            throw Exception("Error trying to read file from storage.", e)
         }
     }
 
@@ -59,10 +55,8 @@ class S3Connection(
         try {
             logger.info(String.format("Delete file from AWS S3. Object: [%s]", fileName))
             s3Client.deleteObject(DeleteObjectRequest (bucketName, fileName))
-        } catch (e: AmazonServiceException) {
-            e.printStackTrace()
-        } catch (e: SdkClientException) {
-            e.printStackTrace()
+        } catch (e: Exception) {
+            throw Exception("Error trying to remove file from storage.", e)
         }
     }
 }

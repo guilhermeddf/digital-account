@@ -15,8 +15,8 @@ class SQSConsumerImpl {
     fun receive(message: String) {
         try {
             logger.info("Message received: $message")
-        }catch (e: Exception) {
-            logger.error("Error receiving Message.")
+        } catch (e: Exception) {
+            throw Exception("Error trying to receive message from queue.")
         }
     }
 }

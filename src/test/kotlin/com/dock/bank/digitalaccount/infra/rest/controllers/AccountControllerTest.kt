@@ -1,7 +1,7 @@
 package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
-import com.dock.bank.digitalaccount.infra.database.repository.AccountRepository
+import com.dock.bank.digitalaccount.infra.postgres.repository.AccountRepository
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateAccountResponse
 import com.dock.bank.digitalaccount.utils.buildHolder
 import com.fasterxml.jackson.annotation.JsonInclude

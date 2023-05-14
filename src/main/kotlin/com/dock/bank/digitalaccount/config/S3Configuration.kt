@@ -15,7 +15,7 @@ class S3Configuration(
     @Value("\${cloud.aws.region.static}") private val region: String,
     @Value("\${cloud.aws.credentials.access-key}") private val accessKeyId: String,
     @Value("\${cloud.aws.credentials.secret-key}") private val secretAccessKey: String,
-    @Value("\${cloud.aws.s3.endpoint.uri}") private val s3Url: String,
+    @Value("\${cloud.aws.s3.endpoint.uri}") private val s3Url: String
 ) {
 
     @Bean
@@ -27,7 +27,7 @@ class S3Configuration(
                 .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(s3Url, region))
                 .build()
         } catch (e: Exception) {
-            throw Exception("Error creating s3 storage.")
+            throw Exception("Error trying to configure AWS S3 storage.", e)
         }
     }
 }
