@@ -21,9 +21,9 @@ class AccountUseCaseImpl(
     private val accountPersistence: AccountPersistence,
     private val holderPersistence: HolderPersistence,
     private val accountGenerator: AccountGenerator,
-    private val accountGateway: AccountGateway,
-    private val producer: QueueProducer,
-    private val objectMapper: ObjectMapper
+    //private val accountGateway: AccountGateway,
+    //private val producer: QueueProducer,
+    //private val objectMapper: ObjectMapper
 ) : AccountUseCase {
 
     companion object {
@@ -31,18 +31,13 @@ class AccountUseCaseImpl(
     }
 
     override suspend fun create(holderCpf: String, test: Boolean): Account {
-        return if (test) {
-            logger.info("Using account fake generator.")
-            val storedHolder = retrieveHolder(holderCpf)
-            logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
-            val account = accountPersistence.create(accountGenerator.generateAccount(storedHolder))
-            val accountString = objectMapper.writeValueAsString(account)
-            producer.publish(accountString)
-            return account
-        } else {
-            logger.info("Using account gateway.")
-            accountGateway.createAccount(holderCpf)
-        }
+        logger.info("Using account fake generator.")
+        val storedHolder = retrieveHolder(holderCpf)
+        logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
+        val account = accountPersistence.create(accountGenerator.generateAccount(storedHolder))
+        //val accountString = objectMapper.writeValueAsString(account)
+        //producer.publish(accountString)
+        return account
     }
 
     override suspend fun disable(id: UUID, status: Status) : Boolean {
