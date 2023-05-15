@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param
 import java.util.Optional
 import java.util.UUID
 
-interface HolderRepository : JpaRepository<HolderTable, UUID> {
+interface PostgresHolderRepository : JpaRepository<HolderTable, UUID> {
 
     @Query(value = "from HolderTable t where :cpf = t.cpf")
     fun findHolderByCpf(@Param("cpf") cpf: String) : Optional<HolderTable>

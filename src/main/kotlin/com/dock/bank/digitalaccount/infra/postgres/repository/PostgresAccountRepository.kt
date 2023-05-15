@@ -1,16 +1,15 @@
-package com.dock.bank.digitalaccount.infra.database.repository
+package com.dock.bank.digitalaccount.infra.postgres.repository
 
 import com.dock.bank.digitalaccount.core.domain.Status
-import com.dock.bank.digitalaccount.infra.database.model.AccountTable
+import com.dock.bank.digitalaccount.infra.postgres.model.AccountTable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
-import java.time.OffsetDateTime
 import java.util.UUID
 import javax.transaction.Transactional
 
-interface AccountRepository : JpaRepository<AccountTable, UUID> {
+interface PostgresAccountRepository : JpaRepository<AccountTable, UUID> {
 
     @Modifying
     @Transactional

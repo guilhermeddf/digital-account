@@ -33,9 +33,8 @@ class HolderController(
         return ResponseEntity.ok(Unit)
     }
 
-    @GetMapping
-    suspend fun get() {
-        holderUseCase.get()
+    @GetMapping("{cpf}")
+    suspend fun get(@PathVariable cpf: String): CreateHolderResponse  {
+        return holderUseCase.get(cpf).toCreateResponse()
     }
-
 }

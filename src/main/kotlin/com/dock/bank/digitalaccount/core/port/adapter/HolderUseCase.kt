@@ -4,7 +4,7 @@ import com.dock.bank.digitalaccount.core.domain.Holder
 import java.util.UUID
 
 interface HolderUseCase {
-    suspend fun create(holder: Holder) : Holder
+    suspend fun create(holder: Holder): Holder
     suspend fun delete(id: UUID)
-    suspend fun get()
+    suspend fun get(cpf: String): Holder
 }

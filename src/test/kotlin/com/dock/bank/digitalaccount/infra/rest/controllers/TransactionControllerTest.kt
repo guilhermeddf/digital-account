@@ -3,7 +3,7 @@ package com.dock.bank.digitalaccount.infra.rest.controllers
 import com.dock.bank.digitalaccount.config.BaseTestConfig
 import com.dock.bank.digitalaccount.core.domain.TransactionType
 import com.dock.bank.digitalaccount.core.exceptions.ErrorMessage
-import com.dock.bank.digitalaccount.infra.postgres.repository.TransactionRepository
+import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresTransactionRepository
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateTransactionResponse
 import com.dock.bank.digitalaccount.utils.buildCreateTransactionRequest
 import com.fasterxml.jackson.annotation.JsonInclude
@@ -39,7 +39,7 @@ class TransactionControllerTest : BaseTestConfig() {
     }
 
     @Autowired
-    protected lateinit var transactionRepository: TransactionRepository
+    protected lateinit var postgresTransactionRepository: PostgresTransactionRepository
 
     @Test
     @DisplayName("should save a credit transaction with success")
