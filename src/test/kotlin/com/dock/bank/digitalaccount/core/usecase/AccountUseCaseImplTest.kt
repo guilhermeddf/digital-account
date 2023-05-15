@@ -88,12 +88,28 @@ class AccountUseCaseImplTest {
         runBlocking {
             val id = UUID.randomUUID()
             val fakeAccount = buildAccount()
-            val credentials = Credentials("user", "password")
+            val credentials = Credentials("guilhermeddf", "1234")
             coEvery { accountPersistence.get(any()) } returns Optional.of(fakeAccount)
 
             accountUseCase.get(id, credentials)
 
             coVerify(exactly = 1) { accountPersistence.get(id) }
+
+        }
+    }
+    @Test
+    @DisplayName("should get an account with success")
+    fun `should get an credentials exception`() {
+        runBlocking {
+            val id = UUID.randomUUID()
+            val fakeAccount = buildAccount()
+            val credentials = Credentials("user", "1111")
+            coEvery { accountPersistence.get(any()) } returns Optional.of(fakeAccount)
+
+            val error = assertThrows<Exception> {
+                accountUseCase.get(id, credentials)
+            }
+            assertEquals("Authorization error.", error.message)
 
         }
     }

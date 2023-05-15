@@ -14,8 +14,8 @@ import java.util.UUID
 @Service
 class HolderUseCaseImpl(
     private val holderPersistence: HolderPersistence,
-    private val storage: FileStorage,
-    @Value("\${cloud.aws.s3.file-name}") private val fileName: String
+    //private val storage: FileStorage,
+    //@Value("\${cloud.aws.s3.file-name}") private val fileName: String
 ) : HolderUseCase {
 
     companion object {

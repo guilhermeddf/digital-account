@@ -11,7 +11,7 @@ import java.util.UUID
 
 fun buildHolder(
     id: UUID = UUID.randomUUID(),
-    cpf: String = "00000000000",
+    cpf: String = "02945811383",
     name: String = "Guilherme Dutra Diniz de Freitas"
 ) = Holder(
     id = id,

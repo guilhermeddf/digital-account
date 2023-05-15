@@ -68,7 +68,7 @@ class HolderUseCaseImplTest {
             val error = assertThrows<ResourceAlreadyExistsException> {
                 holderUseCase.create(fakeHolder)
             }
-            assertEquals("Holder already exists", error.message)
+            assertEquals("Holder already exists.", error.message)
         }
     }
 
