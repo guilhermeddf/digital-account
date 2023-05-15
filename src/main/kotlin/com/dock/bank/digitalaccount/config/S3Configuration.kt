@@ -19,7 +19,6 @@ class S3Configuration(
 ) {
 
     @Bean
-    @Primary
     fun amazonS3(): AmazonS3 {
         try {
             return AmazonS3ClientBuilder.standard()
