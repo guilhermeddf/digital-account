@@ -102,7 +102,7 @@ class AccountUseCaseImplTest {
     fun `should throw an exception trying to get an account`() {
         runBlocking {
             val id = UUID.randomUUID()
-            val credentials = Credentials("user", "password")
+            val credentials = Credentials("guilhermeddf", "1234")
             coEvery { accountPersistence.get(any()) } returns Optional.empty()
 
             val error = assertThrows<ResourceNotFoundException> {
