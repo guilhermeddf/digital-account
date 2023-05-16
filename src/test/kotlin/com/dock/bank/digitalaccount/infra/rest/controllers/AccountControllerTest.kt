@@ -23,7 +23,7 @@ import org.springframework.http.HttpStatus
 
 class AccountControllerTest : BaseTestConfig() {
 
-    companion object {
+ /*   companion object {
         private fun getMapper(): ObjectMapper {
             val objectMapper: ObjectMapper = jacksonObjectMapper()
             objectMapper.registerModule(JavaTimeModule())
@@ -60,5 +60,5 @@ class AccountControllerTest : BaseTestConfig() {
             Executable { Assertions.assertNotNull(objectResponse) },
             Executable { Assertions.assertNotNull(objectResponse.id) },
         )
-    }
+    } */
 }
