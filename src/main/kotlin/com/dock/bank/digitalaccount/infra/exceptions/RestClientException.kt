@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra
+package com.dock.bank.digitalaccount.infra.exceptions
 
 
 

@@ -1,7 +1,6 @@
 package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.core.port.adapter.HolderUseCase
-import com.dock.bank.digitalaccount.infra.credentials.CredentialsManager
 import com.dock.bank.digitalaccount.infra.rest.converter.toCreateResponse
 import com.dock.bank.digitalaccount.infra.rest.converter.toEntity
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderRequest

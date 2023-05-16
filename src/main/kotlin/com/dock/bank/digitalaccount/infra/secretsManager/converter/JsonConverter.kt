@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.credentials.converter
+package com.dock.bank.digitalaccount.infra.secretsManager.converter
 
 import com.dock.bank.digitalaccount.core.domain.Credentials
 import com.dock.bank.digitalaccount.core.domain.Holder

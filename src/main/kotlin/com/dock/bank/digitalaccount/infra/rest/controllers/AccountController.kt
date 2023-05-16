@@ -2,7 +2,7 @@ package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.port.adapter.AccountUseCase
-import com.dock.bank.digitalaccount.infra.credentials.CredentialsManager
+import com.dock.bank.digitalaccount.infra.secretsManager.CredentialsManager
 import com.dock.bank.digitalaccount.infra.rest.converter.toCreateResponse
 import com.dock.bank.digitalaccount.infra.rest.converter.toGetResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateAccountResponse

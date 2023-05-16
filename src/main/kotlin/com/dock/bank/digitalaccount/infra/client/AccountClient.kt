@@ -3,7 +3,7 @@ package com.dock.bank.digitalaccount.infra.client
 import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.exceptions.ErrorMessage
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
-import com.dock.bank.digitalaccount.infra.RestClientException
+import com.dock.bank.digitalaccount.infra.exceptions.RestClientException
 import com.dock.bank.digitalaccount.infra.gateway.AccountGateway
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.HttpStatus

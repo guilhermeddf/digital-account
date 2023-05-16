@@ -5,7 +5,7 @@ import com.dock.bank.digitalaccount.core.exceptions.ErrorMessage
 import com.dock.bank.digitalaccount.core.exceptions.LimitExceededException
 import com.dock.bank.digitalaccount.core.exceptions.ResourceAlreadyExistsException
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
-import com.dock.bank.digitalaccount.infra.RestClientException
+import com.dock.bank.digitalaccount.infra.exceptions.RestClientException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice

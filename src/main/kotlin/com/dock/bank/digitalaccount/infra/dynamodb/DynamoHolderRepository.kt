@@ -6,8 +6,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest
 import com.amazonaws.services.dynamodbv2.model.GetItemRequest
 import com.amazonaws.services.dynamodbv2.model.PutItemRequest
-import com.dock.bank.digitalaccount.core.domain.Holder
-import com.dock.bank.digitalaccount.infra.credentials.converter.JsonConverter
+import com.dock.bank.digitalaccount.infra.secretsManager.converter.JsonConverter
 import com.dock.bank.digitalaccount.infra.postgres.model.HolderTable
 import com.dock.bank.digitalaccount.infra.sqs.SQSConsumerImpl
 import org.slf4j.LoggerFactory

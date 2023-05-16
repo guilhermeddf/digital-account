@@ -1,9 +1,9 @@
-package com.dock.bank.digitalaccount.infra.credentials
+package com.dock.bank.digitalaccount.infra.secretsManager
 
 import com.amazonaws.services.secretsmanager.AWSSecretsManager
 import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest
 import com.dock.bank.digitalaccount.core.domain.Credentials
-import com.dock.bank.digitalaccount.infra.credentials.converter.JsonConverter
+import com.dock.bank.digitalaccount.infra.secretsManager.converter.JsonConverter
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 

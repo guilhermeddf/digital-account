@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.credentials
+package com.dock.bank.digitalaccount.infra.secretsManager
 
 import com.dock.bank.digitalaccount.core.domain.Credentials
 

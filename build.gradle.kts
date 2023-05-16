@@ -38,10 +38,11 @@ dependencies {
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
 
+	implementation("org.springframework.data:spring-data-redis:3.1.0")
+	implementation("redis.clients:jedis:4.4.0")
 
 
 	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-	//implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 
 	implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.468")
 	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.467")

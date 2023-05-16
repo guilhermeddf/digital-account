@@ -6,6 +6,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/digital-account-service?TimeZone=UTC,schema=digital_account_service
     username: digital-account-service-app
     password: digital-account-service-app
+  cache:
+    type: redis
+    host: localhost
+    port: 6379
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
