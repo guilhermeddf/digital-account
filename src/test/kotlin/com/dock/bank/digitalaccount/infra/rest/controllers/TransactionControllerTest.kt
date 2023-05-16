@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.rest.controllers
+/* package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
 import com.dock.bank.digitalaccount.core.domain.TransactionType
@@ -26,7 +26,7 @@ import java.math.BigInteger
 import java.util.*
 
 class TransactionControllerTest : BaseTestConfig() {
-/*
+
     companion object {
         private fun getMapper(): ObjectMapper {
             val objectMapper: ObjectMapper = jacksonObjectMapper()
@@ -134,5 +134,6 @@ class TransactionControllerTest : BaseTestConfig() {
             Executable { assertEquals(objectResponse.status, 409) }
         )
     }
- */
+
 }
+ */

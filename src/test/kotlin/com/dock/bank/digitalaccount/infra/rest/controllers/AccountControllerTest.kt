@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.rest.controllers
+/* package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
 import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresAccountRepository
@@ -23,7 +23,7 @@ import org.springframework.http.HttpStatus
 
 class AccountControllerTest : BaseTestConfig() {
 
- /*   companion object {
+   companion object {
         private fun getMapper(): ObjectMapper {
             val objectMapper: ObjectMapper = jacksonObjectMapper()
             objectMapper.registerModule(JavaTimeModule())
@@ -60,5 +60,6 @@ class AccountControllerTest : BaseTestConfig() {
             Executable { Assertions.assertNotNull(objectResponse) },
             Executable { Assertions.assertNotNull(objectResponse.id) },
         )
-    } */
 }
+
+ */

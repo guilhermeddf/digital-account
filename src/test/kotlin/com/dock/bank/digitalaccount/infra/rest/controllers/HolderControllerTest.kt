@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.rest.controllers
+/* package com.dock.bank.digitalaccount.infra.rest.controllers
 
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 
 class HolderControllerTest : BaseTestConfig() {
-    /*
+
     companion object {
         private fun getMapper(): ObjectMapper {
             val objectMapper: ObjectMapper = jacksonObjectMapper()
@@ -99,5 +99,7 @@ class HolderControllerTest : BaseTestConfig() {
             Executable { assertEquals(objectResponse.status, 409) }
         )
     }
-    */
+
 }
+
+ */
