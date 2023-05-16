@@ -30,7 +30,7 @@ class AccountUseCaseImpl(
         private val logger = LoggerFactory.getLogger(AccountUseCaseImpl::class.java)
     }
 
-    override suspend fun create(holderCpf: String, test: Boolean): Account {
+    override suspend fun create(holderCpf: String): Account {
         logger.info("Using account fake generator.")
         val storedHolder = retrieveHolder(holderCpf)
         logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")

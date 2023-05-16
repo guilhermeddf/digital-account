@@ -13,7 +13,7 @@ group = "com.dock.bank"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
-extra["testcontainersVersion"] = "1.15.0"
+extra["testcontainersVersion"] = "1.18.1"
 
 repositories {
 	mavenCentral()
@@ -51,7 +51,7 @@ dependencies {
 	testImplementation("io.mockk:mockk:1.12.0")
 
 	testImplementation("org.testcontainers:testcontainers:${property("testcontainersVersion")}")
-	testImplementation("org.testcontainers:postgresql:1.16.3")
+	testImplementation("org.testcontainers:postgresql:${property("testcontainersVersion")}")
 	testImplementation("org.testcontainers:junit-jupiter")
 
 	testImplementation("io.rest-assured:rest-assured:4.5.1")

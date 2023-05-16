@@ -33,9 +33,8 @@ class AccountController(
     @PostMapping
     suspend fun create(
         @RequestHeader("holder-cpf") holderCpf: String,
-        @RequestHeader("test") test: Boolean
     ) : CreateAccountResponse {
-        return accountUseCase.create(holderCpf, test).toCreateResponse()
+        return accountUseCase.create(holderCpf).toCreateResponse()
     }
 
     @PatchMapping("/{id}/enable")

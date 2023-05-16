@@ -76,7 +76,7 @@ class HolderUseCaseImplTest {
     @DisplayName(value = "should throw an exception if holder cpf is invalid")
     fun `should throw an exception if holder cpf is invalid`() {
         runBlocking {
-            val fakeHolder = buildHolder()
+            val fakeHolder = buildHolder(cpf = "00000000000")
 
             coEvery { holderPersistence.create(any()) } returns Optional.empty()
 
