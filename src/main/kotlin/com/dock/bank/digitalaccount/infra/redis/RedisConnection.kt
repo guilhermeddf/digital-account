@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.redis
+/*package com.dock.bank.digitalaccount.infra.redis
 
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Component
@@ -20,3 +20,5 @@ class RedisConnection(private val redisConnection: RedisTemplate<String, String>
         redisConnection.delete(key)
     }
 }
+
+ */

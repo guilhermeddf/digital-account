@@ -7,6 +7,7 @@ plugins {
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
 	kotlin("plugin.jpa") version "1.6.10"
+	id("org.sonarqube") version "4.0.0.2929"
 }
 
 group = "com.dock.bank"
@@ -38,8 +39,8 @@ dependencies {
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
 
-	implementation("org.springframework.data:spring-data-redis:3.1.0")
-	implementation("redis.clients:jedis:4.4.0")
+	//implementation("org.springframework.data:spring-data-redis:3.1.0")
+	//implementation("redis.clients:jedis:4.4.0")
 
 
 	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
