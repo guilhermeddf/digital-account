@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.config
+/*package com.dock.bank.digitalaccount.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cache.annotation.EnableCaching
@@ -29,4 +29,4 @@ class RedisConfiguration(
         template.connectionFactory = redis()
         return template
     }
-}
+} */
