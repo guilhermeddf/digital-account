@@ -1,5 +1,6 @@
 package com.dock.bank.digitalaccount.config
 
+import com.dock.bank.digitalaccount.core.factory.TransactionFactoryImpl
 import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
@@ -40,5 +41,10 @@ class DigitalAccountConfig {
         accountPersistence: AccountPersistence
     ): TransactionUseCaseImpl {
         return TransactionUseCaseImpl(transactionPersistence, accountPersistence)
+    }
+    
+    @Bean
+    fun transactionFactory( accountPersistence: AccountPersistence): TransactionFactoryImpl {
+        return TransactionFactoryImpl(accountPersistence)
     }
 }
