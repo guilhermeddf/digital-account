@@ -6,6 +6,7 @@ import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
 import com.dock.bank.digitalaccount.core.port.adapter.HolderUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
 import org.slf4j.LoggerFactory
+import reactor.core.publisher.Mono
 import java.util.*
 
 class HolderUseCaseImpl(
@@ -17,7 +18,7 @@ class HolderUseCaseImpl(
     companion object {
         private val logger = LoggerFactory.getLogger(AccountUseCaseImpl::class.java)
     }
-    override suspend fun create(holder: Holder): Holder {
+    override suspend fun create(holder: Holder): Mono<Holder> {
         holder.validateCpf()
 
         //storage.save(holder.id.toString())

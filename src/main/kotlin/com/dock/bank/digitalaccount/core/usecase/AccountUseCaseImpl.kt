@@ -9,8 +9,9 @@ import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
 import com.dock.bank.digitalaccount.core.port.adapter.AccountUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
+
 import org.slf4j.LoggerFactory
-import java.util.*
+import java.util.UUID
 
 class AccountUseCaseImpl(
     private val accountPersistence: AccountPersistence,

@@ -8,6 +8,7 @@ import com.dock.bank.digitalaccount.infra.postgres.converter.toEntity
 import com.dock.bank.digitalaccount.infra.postgres.converter.toTable
 import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresHolderRepository
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
 import java.util.UUID
 import java.util.Optional
 
@@ -17,7 +18,7 @@ class HolderPersistenceImpl (
     //private val dynamoHolderRepository: DynamoHolderRepository
 ) : HolderPersistence {
 
-    override suspend fun create(holder: Holder): Optional<Holder> {
+    override suspend fun create(holder: Holder): Mono<Optional<Holder>> {
         val postgresStoredHolder = postgresHolderRepository.findHolderByCpf(holder.cpf)
         //val dynamoStoredHolder = dynamoHolderRepository.findHolderByCpf(holder.cpf)
         return if (postgresStoredHolder.isEmpty) {
