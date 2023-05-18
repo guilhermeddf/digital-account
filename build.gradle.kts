@@ -7,15 +7,14 @@ plugins {
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
 	kotlin("plugin.jpa") version "1.6.10"
-	id("org.sonarqube") version "4.0.0.2929"
+	id("org.sonarqube") version "3.5.0.2730"
 }
 
 sonarqube {
 	properties {
-		property("sonar.projectKey", "digital-account")
-		property("sonar.organization", "my-organization")
-		property("sonar.projectName", "digital-account")
-		property("sonar.sources", "src")
+		property ("sonar.projectKey", "guilhermeddf_digital-account")
+		property ("sonar.organization", "guilhermeddf")
+		property ("sonar.host.url", "https://sonarcloud.io")
 	}
 }
 
@@ -24,20 +23,17 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 extra["testcontainersVersion"] = "1.18.1"
-extra["springBootVersion"] = "3.0.6"
 
-	repositories {
+repositories {
 	mavenCentral()
 }
 
 dependencies {
 
 	// Spring Dependencies
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
-	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
-	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
-	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+
 
 	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -47,11 +43,11 @@ dependencies {
 	implementation("org.apache.logging.log4j:log4j-api:2.17.1")
 	implementation("org.apache.logging.log4j:log4j-to-slf4j:2.17.1")
 
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
-	// Database Dependencies
 	implementation("org.postgresql:postgresql:42.3.8")
 
-	// Jackson Dependencies
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
@@ -59,12 +55,13 @@ dependencies {
 	//implementation("org.springframework.data:spring-data-redis:3.1.0")
 	//implementation("redis.clients:jedis:4.4.0")
 
-	// AWS Dependencies
+
+	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
+
 	implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.468")
 	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.467")
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.468")
 
-	// Test Dependencies
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.12.0")
 
