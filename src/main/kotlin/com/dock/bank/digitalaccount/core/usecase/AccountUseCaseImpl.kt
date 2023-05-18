@@ -9,14 +9,9 @@ import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
 import com.dock.bank.digitalaccount.core.port.adapter.AccountUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
-import com.dock.bank.digitalaccount.core.port.queue.QueueProducer
-import com.dock.bank.digitalaccount.infra.gateway.AccountGateway
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Service
-import java.util.UUID
+import java.util.*
 
-@Service
 class AccountUseCaseImpl(
     private val accountPersistence: AccountPersistence,
     private val holderPersistence: HolderPersistence,

@@ -9,11 +9,9 @@ import com.dock.bank.digitalaccount.core.port.adapter.TransactionUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.TransactionPersistence
 import com.dock.bank.digitalaccount.utils.DateUtils
-import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.util.*
 
-@Service
 class TransactionUseCaseImpl(
     private val transactionPersistence: TransactionPersistence,
     private val accountPersistence: AccountPersistence

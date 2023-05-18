@@ -1,33 +1,6 @@
 version: "3.4"
 
 services:
- # web:
- #   image: 'gitlab/gitlab-ce:latest'
- #   restart: always
- #   hostname: 'localhost'
- #   container_name: gitlab-ce
- #   environment:
- #     GITLAB_OMNIBUS_CONFIG: |
- #       external_url 'http://localhost'
- #   ports:
- #     - '8080:80'
- #     - '8443:443'
- #     - '24:24'
- #   volumes:
- #     - '$GITLAB_HOME/config:/etc/gitlab'
- #     - '$GITLAB_HOME/logs:/var/log/gitlab'
- #     - '$GITLAB_HOME/data:/var/opt/gitlab'
-
-
- # gitlab-runner:
- #   image: gitlab/gitlab-runner:alpine
- #   container_name: gitlab-runner
- #   restart: always
- #   depends_on:
- #     - web
- #   volumes:
- #     - /var/run/docker.sock:/var/run/docker.sock
- #     - '$GITLAB_HOME/gitlab-runner:/etc/gitlab-runner'
 
   localstack:
     container_name: aws_stack
@@ -60,28 +33,31 @@ services:
     ports:
       - "5432:5432"
     environment:
+      POSTGRES_USER: sonartest
       POSTGRES_PASSWORD: "mM@md38d23"
     volumes:
       - ./local/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
 
-  fake-service:
-    image: mockoon/cli:1.5.1
-    container_name: fake-service
-    ports:
-      - "3001:3001"
-    command: -d /data -i 0 -p 3001
-    volumes:
-      - ./local/mockoon/data.json:/data
+#  fake-service:
+#    image: mockoon/cli:1.5.1
+#    container_name: fake-service
+#    ports:
+#      - "3001:3001"
+#    command: -d /data -i 0 -p 3001
+#    volumes:
+#      - ./local/mockoon/data.json:/data
 
-  cache:
-    image: redis:6.2-alpine
-    container_name: redis-service
-    restart: always
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-    volumes: 
-      - cache:/data
+#  cache:
+#    image: redis:6.2-alpine
+#    container_name: redis-service
+#    restart: always
+#    ports:
+#      - '6379:6379'
+#    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+#    volumes:
+#      - cache:/data
 
 #  influxdb:
 #    image: influxdb:1.8
@@ -122,6 +98,49 @@ services:
 #    extra_hosts:
 #      - "host.docker.internal:host-gateway"
 
+#  web:
+#    image: 'gitlab/gitlab-ce:latest'
+#    restart: always
+#    hostname: 'localhost'
+#    container_name: gitlab-ce
+#    environment:
+#      GITLAB_OMNIBUS_CONFIG: |
+#        external_url 'http://localhost'
+#    ports:
+#      - '8080:80'
+#      - '8443:443'
+#      - '24:24'
+#    volumes:
+#      - '$GITLAB_HOME/config:/etc/gitlab'
+#      - '$GITLAB_HOME/logs:/var/log/gitlab'
+#      - '$GITLAB_HOME/data:/var/opt/gitlab'
+
+#  gitlab-runner:
+#    image: gitlab/gitlab-runner:alpine
+#    container_name: gitlab-runner
+#    restart: always
+#    depends_on:
+#      - web
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - '$GITLAB_HOME/gitlab-runner:/etc/gitlab-runner'
+
+#  sonarqube:
+#    image: sonarqube:9.9.1-community
+#    container_name: sonar-service
+#    depends_on:
+#      - postgres
+#    environment:
+#      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/digital-account-service
+#      SONAR_JDBC_USERNAME: digital-account-service-app
+#      SONAR_JDBC_PASSWORD: digital-account-service-app
+#    volumes:
+#      - SonarQube_data:/opt/SonarQube/data
+#      - SonarQube_extensions:/opt/SonarQube/extensions
+#      - SonarQube_logs:/opt/SonarQube/logs
+#    ports:
+#      - "9000:9000"
+
 networks:
   k6:
   grafana:
@@ -130,3 +149,8 @@ networks:
 volumes:
   cache:
     driver: local
+  SonarQube_data:
+  SonarQube_extensions:
+  SonarQube_logs:
+  postgresql:
+  postgresql_data:

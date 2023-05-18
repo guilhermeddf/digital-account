@@ -4,12 +4,10 @@ import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
-import org.springframework.stereotype.Component
 import java.math.BigInteger
 import java.util.*
 import kotlin.random.Random
 
-@Component
 class AccountGeneratorImpl : AccountGenerator {
 
     companion object {

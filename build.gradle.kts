@@ -23,40 +23,47 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 extra["testcontainersVersion"] = "1.18.1"
+extra["springBootVersion"] = "3.0.6"
 
-repositories {
+	repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-web")
 
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	// Spring Dependencies
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
+	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
+	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
+	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+
+	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
 	implementation("org.apache.logging.log4j:log4j-api:2.17.1")
 	implementation("org.apache.logging.log4j:log4j-to-slf4j:2.17.1")
-	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
-	implementation("org.postgresql:postgresql:42.3.3")
 
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
+	// Database Dependencies
+	implementation("org.postgresql:postgresql:42.3.8")
+
+	// Jackson Dependencies
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
 
 	//implementation("org.springframework.data:spring-data-redis:3.1.0")
 	//implementation("redis.clients:jedis:4.4.0")
 
-
-	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-
+	// AWS Dependencies
 	implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.468")
 	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.467")
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.468")
 
+	// Test Dependencies
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.12.0")
 

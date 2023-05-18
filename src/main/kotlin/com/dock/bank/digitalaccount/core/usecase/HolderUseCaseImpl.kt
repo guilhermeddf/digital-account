@@ -5,13 +5,9 @@ import com.dock.bank.digitalaccount.core.exceptions.ResourceAlreadyExistsExcepti
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
 import com.dock.bank.digitalaccount.core.port.adapter.HolderUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
-import com.dock.bank.digitalaccount.core.port.storage.FileStorage
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Service
-import java.util.UUID
+import java.util.*
 
-@Service
 class HolderUseCaseImpl(
     private val holderPersistence: HolderPersistence,
     //private val storage: FileStorage,
