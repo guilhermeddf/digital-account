@@ -2,6 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 extra["testcontainersVersion"] = "1.18.1"
 extra["springBootVersion"] = "3.0.6"
+extra["restAssured"] = "5.3.0"
+extra["restAssuredDep"] = "5.2.1"
+extra["awsVersion"] = "1.12.470"
 
 plugins {
 	id("org.springframework.boot") version "3.0.6"
@@ -47,7 +50,7 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
 	implementation("org.postgresql:postgresql:42.3.8")
-
+	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
@@ -59,21 +62,22 @@ dependencies {
 
 	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
 
-	implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.468")
-	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.467")
-	implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.468")
-	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+	implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
+	implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
+	implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
 	testImplementation("io.mockk:mockk:1.12.0")
 
+	// Test Container
 	testImplementation("org.testcontainers:testcontainers:${property("testcontainersVersion")}")
 	testImplementation("org.testcontainers:postgresql:${property("testcontainersVersion")}")
 	testImplementation("org.testcontainers:junit-jupiter")
 
-	testImplementation("io.rest-assured:rest-assured:5.3.0")
-	testImplementation ("io.rest-assured:json-path:5.2.1")
-	testImplementation ("io.rest-assured:xml-path:5.2.1")
+	// Rest Assured
+	testImplementation("io.rest-assured:rest-assured:${property("restAssured")}")
+	testImplementation ("io.rest-assured:json-path:${property("restAssuredDep")}")
+	testImplementation ("io.rest-assured:xml-path:${property("restAssuredDep")}")
 }
 
 dependencyManagement {

@@ -11,7 +11,6 @@ import java.math.BigInteger
 import java.time.OffsetDateTime
 import java.util.*
 
-@Component
 class TransactionFactoryImpl(
     private val accountPersistence: AccountPersistence
 ) : TransactionFactory{
@@ -30,13 +29,9 @@ class TransactionFactoryImpl(
         )
     }
 
-    suspend fun fillAccountById(id: UUID) : Account {
+    private suspend fun fillAccountById(id: UUID) : Account {
         return accountPersistence.get(id).orElseThrow {
             throw ResourceNotFoundException(message = "Account not found.")
         }
-    }
-
-    suspend fun sumAccountTransactionValueLimit(createdDate: OffsetDateTime) {
-
     }
 }
