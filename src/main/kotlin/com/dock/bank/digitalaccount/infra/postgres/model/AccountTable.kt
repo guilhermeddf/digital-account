@@ -1,17 +1,9 @@
 package com.dock.bank.digitalaccount.infra.postgres.model
 
 import com.dock.bank.digitalaccount.core.domain.Status
+import jakarta.persistence.*
 import java.math.BigInteger
 import java.util.UUID
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.FetchType
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.OneToOne
-import javax.persistence.Table
 
 @Entity
 @Table(name = "account")

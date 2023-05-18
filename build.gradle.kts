@@ -1,12 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+extra["testcontainersVersion"] = "1.18.1"
+extra["springBootVersion"] = "3.0.6"
 
 plugins {
-	id("org.springframework.boot") version "2.6.4"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.6.10"
-	kotlin("plugin.spring") version "1.6.10"
-	kotlin("plugin.jpa") version "1.6.10"
+	id("org.springframework.boot") version "3.0.6"
+	id("io.spring.dependency-management") version "1.1.0"
+	kotlin("jvm") version "1.7.22"
+	kotlin("plugin.spring") version "1.7.22"
+	kotlin("plugin.jpa") version "1.7.22"
 	id("org.sonarqube") version "3.5.0.2730"
 }
 
@@ -20,9 +22,7 @@ sonarqube {
 
 group = "com.dock.bank"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
-
-extra["testcontainersVersion"] = "1.18.1"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -31,8 +31,9 @@ repositories {
 dependencies {
 
 	// Spring Dependencies
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
+	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
+	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
 
 
 	// Kotlin Dependencies
@@ -61,17 +62,18 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.12.468")
 	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.467")
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.468")
+	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
 	testImplementation("io.mockk:mockk:1.12.0")
 
 	testImplementation("org.testcontainers:testcontainers:${property("testcontainersVersion")}")
 	testImplementation("org.testcontainers:postgresql:${property("testcontainersVersion")}")
 	testImplementation("org.testcontainers:junit-jupiter")
 
-	testImplementation("io.rest-assured:rest-assured:4.5.1")
-	testImplementation ("io.rest-assured:json-path:4.5.1")
-	testImplementation ("io.rest-assured:xml-path:4.5.1")
+	testImplementation("io.rest-assured:rest-assured:5.3.0")
+	testImplementation ("io.rest-assured:json-path:5.2.1")
+	testImplementation ("io.rest-assured:xml-path:5.2.1")
 }
 
 dependencyManagement {
@@ -83,7 +85,7 @@ dependencyManagement {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "17"
 	}
 }
 
