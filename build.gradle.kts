@@ -14,7 +14,8 @@ sonarqube {
 	properties {
 		property("sonar.projectKey", "digital-account")
 		property("sonar.organization", "my-organization")
-		property("sonar.host.url", "http://localhost:9000")
+		property("sonar.projectName", "digital-account")
+		property("sonar.sources", "src")
 	}
 }
 
