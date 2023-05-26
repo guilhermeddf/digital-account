@@ -60,4 +60,5 @@ class AccountControllerTest : BaseTestConfig() {
             Executable { Assertions.assertNotNull(objectResponse) },
             Executable { Assertions.assertNotNull(objectResponse.id) },
         )
+   }
 }
