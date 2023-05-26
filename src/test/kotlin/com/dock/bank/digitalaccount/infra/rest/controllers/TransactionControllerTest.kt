@@ -134,5 +134,4 @@ class TransactionControllerTest : BaseTestConfig() {
             Executable { assertEquals(objectResponse.status, 409) }
         )
     }
-
 }
