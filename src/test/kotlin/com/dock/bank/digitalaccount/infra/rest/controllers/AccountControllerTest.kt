@@ -1,4 +1,4 @@
-/* package com.dock.bank.digitalaccount.infra.rest.controllers
+package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
 import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresAccountRepository
@@ -61,5 +61,3 @@ class AccountControllerTest : BaseTestConfig() {
             Executable { Assertions.assertNotNull(objectResponse.id) },
         )
 }
-
- */
