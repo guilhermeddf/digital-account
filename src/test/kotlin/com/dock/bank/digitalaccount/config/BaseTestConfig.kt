@@ -1,4 +1,4 @@
-/*package com.dock.bank.digitalaccount.config
+package com.dock.bank.digitalaccount.config
 
 import com.dock.bank.digitalaccount.DigitalaccountApplication
 import io.restassured.RestAssured
@@ -65,4 +65,4 @@ class BaseTestConfig {
     }
 
 
-} */
+}

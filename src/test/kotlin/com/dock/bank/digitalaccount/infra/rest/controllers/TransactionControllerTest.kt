@@ -1,4 +1,4 @@
-/* package com.dock.bank.digitalaccount.infra.rest.controllers
+package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
 import com.dock.bank.digitalaccount.core.domain.TransactionType
@@ -134,6 +134,4 @@ class TransactionControllerTest : BaseTestConfig() {
             Executable { assertEquals(objectResponse.status, 409) }
         )
     }
-
 }
- */

@@ -1,4 +1,4 @@
-/* package com.dock.bank.digitalaccount.infra.rest.controllers
+package com.dock.bank.digitalaccount.infra.rest.controllers
 
 
 import com.dock.bank.digitalaccount.config.BaseTestConfig
@@ -101,5 +101,3 @@ class HolderControllerTest : BaseTestConfig() {
     }
 
 }
-
- */
