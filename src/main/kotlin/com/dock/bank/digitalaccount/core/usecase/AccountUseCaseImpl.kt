@@ -11,29 +11,21 @@ import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
 
 import org.slf4j.LoggerFactory
+import reactor.core.publisher.Mono
 import java.util.UUID
 
 class AccountUseCaseImpl(
     private val accountPersistence: AccountPersistence,
     private val holderPersistence: HolderPersistence,
     private val accountGenerator: AccountGenerator,
-    //private val accountGateway: AccountGateway,
-    //private val producer: QueueProducer,
-    //private val objectMapper: ObjectMapper
 ) : AccountUseCase {
 
     companion object {
         private val logger = LoggerFactory.getLogger(AccountUseCaseImpl::class.java)
     }
 
-    override suspend fun create(holderCpf: String): Account {
-        logger.info("Using account fake generator.")
-        val storedHolder = retrieveHolder(holderCpf)
-        logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
-        val account = accountPersistence.create(accountGenerator.generateAccount(storedHolder))
-        //val accountString = objectMapper.writeValueAsString(account)
-        //producer.publish(accountString)
-        return account
+    override suspend fun create(holderCpf: String): Mono<Account> {
+        return retrieveHolder(holderCpf).map { accountGenerator.generateAccount(it) }
     }
 
     override suspend fun disable(id: UUID, status: Status) : Boolean {
@@ -48,18 +40,11 @@ class AccountUseCaseImpl(
         return accountPersistence.enable(id, status)
     }
 
-    override suspend fun get(id: UUID, credentials: Credentials): Account {
-        if(credentials.user != "guilhermeddf" || credentials.password != "1234") {
-            throw Exception("Authorization error.")
-        }
-        return accountPersistence.get(id).orElseThrow {
-            throw ResourceNotFoundException(message = "Account not found.")
-        }
+    override suspend fun get(id: UUID, credentials: Credentials): Mono<Account> {
+        return accountPersistence.get(id).switchIfEmpty(throw ResourceNotFoundException(message = "Account not found."))
     }
 
-    private suspend fun retrieveHolder(holderCpf: String) : Holder {
-        return holderPersistence.findByCpf(holderCpf).orElseThrow {
-            throw ResourceNotFoundException(message = "Holder not Found.")
-        }
+    private suspend fun retrieveHolder(holderCpf: String) : Mono<Holder> {
+        return holderPersistence.findByCpf(holderCpf)
     }
 }

@@ -1,34 +1,27 @@
 package com.dock.bank.digitalaccount.infra.postgres.model
 
 import com.dock.bank.digitalaccount.core.domain.Status
-import jakarta.persistence.*
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
 import java.math.BigInteger
-import java.util.UUID
+import java.util.*
 
-@Entity
-@Table(name = "account")
+
+@Table(name = "accounts")
 data class AccountTable (
 
     @Id
     val id: UUID,
 
-    @Column(name = "balance", nullable = false)
     val balance: BigInteger,
 
-    @Column(name = "number", nullable = false)
     val number: String,
 
-    @Column(name = "branch", nullable = false)
     val branch: String,
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "holder_id")
-    val holder: HolderTable,
+    val holderId: UUID,
 
-    @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.STRING)
     val status: Status,
 
-    @Column(name = "withdrawal_limit", nullable = false)
     val withdrawalLimit: BigInteger
 )

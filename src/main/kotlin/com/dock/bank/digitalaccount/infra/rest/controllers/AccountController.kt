@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import reactor.core.publisher.Mono
 import java.util.UUID
 
 @RestController
@@ -25,16 +26,16 @@ class AccountController(
 ) {
 
     @GetMapping("/{id}")
-    suspend fun get(@PathVariable id: UUID, @RequestHeader("api-id") apiId: String) : GetAccountResponse {
+    suspend fun get(@PathVariable id: UUID, @RequestHeader("api-id") apiId: String) : Mono<GetAccountResponse> {
         val credentials = credentialsManager.getCredentials(apiId)
-        return accountUseCase.get(id, credentials).toGetResponse()
+        return accountUseCase.get(id, credentials).map { account -> account.toGetResponse() }
     }
 
     @PostMapping
     suspend fun create(
         @RequestHeader("holder-cpf") holderCpf: String,
-    ) : CreateAccountResponse {
-        return accountUseCase.create(holderCpf).toCreateResponse()
+    ) : Mono<CreateAccountResponse> {
+        return accountUseCase.create(holderCpf).map {account -> account.toCreateResponse()}
     }
 
     @PatchMapping("/{id}/enable")

@@ -7,6 +7,7 @@ import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
 import com.dock.bank.digitalaccount.core.port.adapter.TransactionFactory
 import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import org.springframework.stereotype.Component
+import reactor.core.publisher.Mono
 import java.math.BigInteger
 import java.time.OffsetDateTime
 import java.util.*
@@ -30,8 +31,8 @@ class TransactionFactoryImpl(
     }
 
     private suspend fun fillAccountById(id: UUID) : Account {
-        return accountPersistence.get(id).orElseThrow {
-            throw ResourceNotFoundException(message = "Account not found.")
-        }
+        return accountPersistence.get(id)
+            .switchIfEmpty(Mono.error(ResourceNotFoundException(message = "Account not found.")))
+
     }
 }

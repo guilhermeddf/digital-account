@@ -37,21 +37,26 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
 	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
 	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
-
+	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
+	implementation("org.springframework.data:spring-data-r2dbc:${property("springBootVersion")}")
 
 	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
+	// Logging Dependencies
 	implementation("org.apache.logging.log4j:log4j-api:2.17.1")
 	implementation("org.apache.logging.log4j:log4j-to-slf4j:2.17.1")
 
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
-	implementation("org.postgresql:postgresql:42.3.8")
-	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+	// Database Dependencies
+	//implementation("org.postgresql:postgresql:42.3.8")
+	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
+	//implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 
+	// Jackson Dependencies
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
@@ -60,8 +65,7 @@ dependencies {
 	//implementation("redis.clients:jedis:4.4.0")
 
 
-	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-
+	// AWS Dependencies
 	implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
 	implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")

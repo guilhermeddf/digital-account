@@ -1,14 +1,15 @@
 package com.dock.bank.digitalaccount.infra.postgres.repository
 
 import com.dock.bank.digitalaccount.infra.postgres.model.HolderTable
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
-import org.springframework.data.repository.query.Param
-import java.util.Optional
-import java.util.UUID
+import org.springframework.data.r2dbc.repository.Query
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
+import java.util.*
 
-interface PostgresHolderRepository : JpaRepository<HolderTable, UUID> {
+@Repository
+interface PostgresHolderRepository : ReactiveCrudRepository<HolderTable, UUID> {
 
-    @Query(value = "from HolderTable t where :cpf = t.cpf")
-    fun findHolderByCpf(@Param("cpf") cpf: String) : Optional<HolderTable>
+    @Query(value = "FROM HolderTable t where :cpf = t.cpf")
+    fun findHolderByCpf(cpf: String) : Mono<HolderTable>
 }

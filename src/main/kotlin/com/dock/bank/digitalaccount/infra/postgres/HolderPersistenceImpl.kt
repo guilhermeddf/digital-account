@@ -14,37 +14,23 @@ import java.util.Optional
 
 @Repository
 class HolderPersistenceImpl (
-    private val postgresHolderRepository: PostgresHolderRepository,
-    //private val dynamoHolderRepository: DynamoHolderRepository
+    private val postgresHolderRepository: PostgresHolderRepository
 ) : HolderPersistence {
 
-    override suspend fun create(holder: Holder): Mono<Optional<Holder>> {
-        val postgresStoredHolder = postgresHolderRepository.findHolderByCpf(holder.cpf)
-        //val dynamoStoredHolder = dynamoHolderRepository.findHolderByCpf(holder.cpf)
-        return if (postgresStoredHolder.isEmpty) {
-            Optional.of(postgresHolderRepository.save(holder.toTable()).toEntity())
-        } else {
-            Optional.empty<Holder>()
-        }
+    override suspend fun create(holder: Holder): Mono<Holder> {
+        return postgresHolderRepository.findHolderByCpf(holder.cpf)
+            .switchIfEmpty(
+                postgresHolderRepository.save(holder.toTable())
+            ).map { holder -> holder.toEntity() }
     }
 
-    override suspend fun findByCpf(holderCpf: String): Optional<Holder> {
-        val postgresStoredHolder = postgresHolderRepository.findHolderByCpf(holderCpf)
-        //val dynamoStoredHolder = dynamoHolderRepository.findHolderByCpf(holderCpf)
-        return if (postgresStoredHolder.isEmpty) {
-            Optional.empty<Holder>()
-        } else {
-            Optional.of(postgresStoredHolder.get().toEntity())
-        }
+    override suspend fun findByCpf(holderCpf: String): Mono<Holder> {
+        return postgresHolderRepository.findHolderByCpf(holderCpf)
+            .map { holder -> holder.toEntity() }
+            .switchIfEmpty(Mono.empty())
     }
 
-    override suspend fun delete(id: UUID)  {
-        if(postgresHolderRepository.existsById(id)) {
-            return postgresHolderRepository.deleteById(id)
-        }
-        /*if (dynamoHolderRepository.existsById(id)) {
-            return dynamoHolderRepository.deleteById(id)
-        } */
-        throw ResourceNotFoundException("Holder not found.")
+    override suspend fun delete(id: UUID): Mono<Void>  {
+        return postgresHolderRepository.deleteById(id)
     }
 }

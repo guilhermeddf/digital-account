@@ -3,13 +3,17 @@ package com.dock.bank.digitalaccount.infra.postgres.repository
 import com.dock.bank.digitalaccount.core.domain.TransactionType
 import com.dock.bank.digitalaccount.infra.postgres.model.AccountTable
 import com.dock.bank.digitalaccount.infra.postgres.model.TransactionTable
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
+import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import java.time.OffsetDateTime
-import java.util.UUID
+import java.util.*
 
-interface PostgresTransactionRepository : JpaRepository<TransactionTable, UUID> {
+@Repository
+interface PostgresTransactionRepository : ReactiveCrudRepository<TransactionTable, UUID> {
 
     @Query(value = "SELECT SUM(tt.amount) FROM TransactionTable tt WHERE tt.createdDate BETWEEN :createdInitDate AND :createdFinishDate AND tt.type = :type AND tt.account = :account")
     fun sumDebitTransactionsAmountByCreatedDateAndAccount(
@@ -17,12 +21,12 @@ interface PostgresTransactionRepository : JpaRepository<TransactionTable, UUID> 
         @Param("createdFinishDate") createdFinishDate: OffsetDateTime,
         @Param("account") account: AccountTable,
         @Param("type") type: TransactionType
-    ) : Int?
+    ) : Mono<Int>
 
     @Query(value = "FROM TransactionTable tt WHERE tt.createdDate BETWEEN :startDate AND :finishDate AND tt.account = :account")
     fun getTransactionsByStartDateAndFinishDateAndAccount(
         @Param("startDate") startDate: OffsetDateTime,
         @Param("finishDate") finishDate: OffsetDateTime,
         @Param("account") account: AccountTable,
-    ) : List<TransactionTable>
+    ) : Flux<TransactionTable>
 }

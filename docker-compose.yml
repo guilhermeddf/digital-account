@@ -149,8 +149,8 @@ networks:
 volumes:
   cache:
     driver: local
-  SonarQube_data:
-  SonarQube_extensions:
-  SonarQube_logs:
+#  SonarQube_data:
+#  SonarQube_extensions:
+#  SonarQube_logs:
   postgresql:
   postgresql_data:

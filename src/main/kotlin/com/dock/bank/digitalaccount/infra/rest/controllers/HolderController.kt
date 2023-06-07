@@ -37,4 +37,5 @@ class HolderController(
     suspend fun get(@PathVariable cpf: String): CreateHolderResponse  {
         return holderUseCase.get(cpf).toCreateResponse()
     }
+
 }

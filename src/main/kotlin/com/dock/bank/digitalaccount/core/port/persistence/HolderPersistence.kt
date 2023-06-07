@@ -6,7 +6,7 @@ import java.util.UUID
 import java.util.Optional
 
 interface HolderPersistence {
-    suspend fun create(holder: Holder) : Mono<Optional<Holder>>
-    suspend fun findByCpf(holderCpf: String) : Optional<Holder>
-    suspend fun delete(id: UUID)
+    suspend fun create(holder: Holder) : Mono<Holder>
+    suspend fun findByCpf(holderCpf: String) : Mono<Holder>
+    suspend fun delete(id: UUID) : Mono<Void>
 }
