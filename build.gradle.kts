@@ -38,6 +38,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
 	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
 
+	implementation("org.springframework.boot:spring-boot-starter-actuator:3.1.0")
+	implementation("io.micrometer:micrometer-registry-prometheus:1.11.0")
 
 	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
