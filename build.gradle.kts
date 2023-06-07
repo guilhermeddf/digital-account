@@ -76,8 +76,6 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 
 	implementation("org.springframework.kafka:spring-kafka:3.0.7")
-	implementation("org.apache.avro:avro-compiler:1.11.1")
-	implementation("org.apache.avro:avro-maven-plugin:1.11.1")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
 	testImplementation("io.mockk:mockk:1.12.0")

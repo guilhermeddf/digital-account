@@ -16,7 +16,7 @@ import java.net.http.HttpResponse.BodyHandlers
 @Component
 class AccountClient(
     private val objectMapper: ObjectMapper
-    ): AccountGateway {
+): AccountGateway {
 
     val URL = "http://localhost:3001"
     val PATH = "/accounts/"
