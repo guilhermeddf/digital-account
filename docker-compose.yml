@@ -58,6 +58,9 @@ services:
       - "3000:3000"
     networks:
       - prometheus
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
 
 #  grafana:
 #    image: grafana/grafana:latest
@@ -72,8 +75,8 @@ services:
 #      - GF_SERVER_SERVE_FROM_SUB_PATH=true
 #    volumes:
 #      - ./loadtest/dashboards/dashboards:/var/lib/grafana/dashboards
-#      - ./loadtest/grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
-#      - ./loadtest/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+#      - ./loadtest/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+#      - ./loadtest/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
 
 #  fake-service:
 #    image: mockoon/cli:1.5.1
