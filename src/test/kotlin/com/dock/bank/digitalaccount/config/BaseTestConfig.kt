@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestInstance
 import org.slf4j.LoggerFactory
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.util.TestPropertyValues
-import org.springframework.boot.web.server.LocalServerPort
+//import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ActiveProfiles
@@ -24,7 +24,7 @@ import org.testcontainers.containers.Network
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BaseTestConfig {
 
-    @LocalServerPort
+//    @LocalServerPort
     private val port: Int = 0
 
     @BeforeAll
