@@ -5,6 +5,7 @@ extra["springBootVersion"] = "3.0.6"
 extra["restAssured"] = "5.3.0"
 extra["restAssuredDep"] = "5.2.1"
 extra["awsVersion"] = "1.12.470"
+extra["cucumberVersion"] = "7.12.1"
 
 plugins {
 	id("org.springframework.boot") version "3.0.6"
@@ -38,19 +39,26 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
 	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
 
+	//Metrics
 	implementation("org.springframework.boot:spring-boot-starter-actuator:3.1.0")
 	implementation("io.micrometer:micrometer-registry-prometheus:1.11.0")
+
+	//CircuitBreaker
+	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j:3.0.2")
+
+	//Documentation
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 
 	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
+	//Logging
 	implementation("org.apache.logging.log4j:log4j-api:2.17.1")
 	implementation("org.apache.logging.log4j:log4j-to-slf4j:2.17.1")
 
-	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
-
+	//Database
 	implementation("org.postgresql:postgresql:42.3.8")
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 
@@ -61,12 +69,12 @@ dependencies {
 	//implementation("org.springframework.data:spring-data-redis:3.1.0")
 	//implementation("redis.clients:jedis:4.4.0")
 
-
+	//AWS
 	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-
 	implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
 	implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
+
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
 	testImplementation("io.mockk:mockk:1.12.0")
@@ -80,6 +88,11 @@ dependencies {
 	testImplementation("io.rest-assured:rest-assured:${property("restAssured")}")
 	testImplementation ("io.rest-assured:json-path:${property("restAssuredDep")}")
 	testImplementation ("io.rest-assured:xml-path:${property("restAssuredDep")}")
+
+	//Cucumber
+	testImplementation("io.cucumber:cucumber-java:${property("cucumberVersion")}")
+	testImplementation("io.cucumber:cucumber-junit:${property("cucumberVersion")}")
+	testImplementation("io.cucumber:cucumber-spring:${property("cucumberVersion")}")
 }
 
 dependencyManagement {
