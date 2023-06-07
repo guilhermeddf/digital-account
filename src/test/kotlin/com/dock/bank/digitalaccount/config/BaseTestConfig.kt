@@ -63,6 +63,4 @@ class BaseTestConfig {
             ).applyTo(context.environment)
         }
     }
-
-
 }

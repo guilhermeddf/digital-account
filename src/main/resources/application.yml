@@ -44,15 +44,21 @@ cloud:
 
 management:
   endpoints:
+    enabled-by-default: false
     web:
       base-path: /actuator
       exposure:
-        include: [ "health","prometheus", "metrics" ]
+        include: [ "health","prometheus"]
+  metrics:
+    export:
+      prometheus:
+        enabled: true
   endpoint:
-    health:
-      show-details: always
     metrics:
+      enabled: false
+    health:
       enabled: true
+      show-details: always
     prometheus:
       enabled: true
 
