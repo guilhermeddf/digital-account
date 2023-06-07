@@ -12,6 +12,25 @@ spring:
     port: 6379
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: group_id
+    consumer:
+      bootstrap-servers: 127.0.0.1:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: group_id
+      auto-offset-reset: earliest
+    topic:
+      name: test
+
+auto:
+  create:
+    topics:
+      enable: true
 
 cloud:
   aws:

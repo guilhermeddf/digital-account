@@ -2,7 +2,7 @@ package com.dock.bank.digitalaccount.infra.sqs
 
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.model.SendMessageRequest
-import com.dock.bank.digitalaccount.core.port.queue.QueueProducer
+import com.dock.bank.digitalaccount.core.port.messaging.QueueProducer
 import com.dock.bank.digitalaccount.core.usecase.AccountUseCaseImpl
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
