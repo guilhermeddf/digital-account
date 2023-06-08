@@ -16,7 +16,7 @@ services:
     volumes:
       - ./cloudformation/template:/cloudformation/template
       - ./local/aws:/etc/localstack/init/ready.d
-      - ./var/run/docker.sock:/var/run/docker.sock
+#      - ./var/run/docker.sock:/var/run/docker.sock
 
   flyway:
     image: flyway/flyway:7.14-alpine
@@ -66,18 +66,27 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop:latest
-    container_name: kafdrop-container
-    networks:
-      - broker-kafka
-    depends_on:
-      - kafka
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis-service
+    restart: always
     ports:
-      - 19000:9000
-    environment:
-      KAFKA_BROKERCONNECT: kafka:29092
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
 
+#  kafdrop:
+#    image: obsidiandynamics/kafdrop:latest
+#    container_name: kafdrop-container
+#    networks:
+#      - broker-kafka
+#    depends_on:
+#      - kafka
+#    ports:
+#      - 19000:9000
+#    environment:
+#      KAFKA_BROKERCONNECT: kafka:29092
 
 #  prometheus:
 #    image: prom/prometheus:latest
@@ -109,16 +118,6 @@ services:
 #    command: -d /data -i 0 -p 3001
 #    volumes:
 #      - ./local/mockoon/data.json:/data
-
-#  cache:
-#    image: redis:6.2-alpine
-#    container_name: redis-service
-#    restart: always
-#    ports:
-#      - '6379:6379'
-#    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-#    volumes:
-#      - cache:/data
 
 #  influxdb:
 #    image: influxdb:1.8

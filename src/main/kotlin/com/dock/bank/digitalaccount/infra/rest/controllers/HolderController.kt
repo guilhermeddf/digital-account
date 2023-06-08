@@ -22,7 +22,6 @@ class HolderController(
 ) {
     @PostMapping
     suspend fun create(@RequestBody createHolderRequest: CreateHolderRequest) : CreateHolderResponse {
-
         return holderUseCase.create(createHolderRequest.toEntity()).toCreateResponse()
     }
 
