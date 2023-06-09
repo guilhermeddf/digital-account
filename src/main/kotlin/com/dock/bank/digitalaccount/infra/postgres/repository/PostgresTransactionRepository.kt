@@ -6,9 +6,11 @@ import com.dock.bank.digitalaccount.infra.postgres.model.TransactionTable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
 import java.time.OffsetDateTime
 import java.util.UUID
 
+@Repository
 interface PostgresTransactionRepository : JpaRepository<TransactionTable, UUID> {
 
     @Query(value = "SELECT SUM(tt.amount) FROM TransactionTable tt WHERE tt.createdDate BETWEEN :createdInitDate AND :createdFinishDate AND tt.type = :type AND tt.account = :account")

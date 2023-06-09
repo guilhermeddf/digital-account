@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 extra["testcontainersVersion"] = "1.18.1"
-extra["springBootVersion"] = "3.0.6"
+extra["springBootVersion"] = "3.1.0"
 extra["restAssured"] = "5.3.0"
 extra["restAssuredDep"] = "5.2.1"
 extra["awsVersion"] = "1.12.470"
@@ -39,8 +39,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
 	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
 
+	//Security
+	implementation("org.springframework.boot:spring-boot-starter-security:${property("springBootVersion")}")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("com.auth0:java-jwt:4.4.0")
+
 	//Metrics
-	implementation("org.springframework.boot:spring-boot-starter-actuator:3.1.0")
+	implementation("org.springframework.boot:spring-boot-starter-actuator:${property("springBootVersion")}")
 	implementation("io.micrometer:micrometer-registry-prometheus:1.11.0")
 
 	//CircuitBreaker
@@ -67,7 +72,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
 
 	//Redis
-	implementation("org.springframework.boot:spring-boot-starter-data-redis:3.1.0")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis:${property("springBootVersion")}")
 	implementation("redis.clients:jedis:4.4.0")
 
 	//AWS

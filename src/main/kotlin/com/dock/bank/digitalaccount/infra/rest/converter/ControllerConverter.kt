@@ -3,12 +3,15 @@ package com.dock.bank.digitalaccount.infra.rest.converter
 import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Transaction
+import com.dock.bank.digitalaccount.infra.postgres.model.Role
+import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateAccountResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderRequest
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateTransactionResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.GetAccountResponse
 import com.dock.bank.digitalaccount.infra.rest.dto.RetrieveTransactionResponse
+import com.dock.bank.digitalaccount.utils.CustomUserDetails
 import java.util.UUID
 
 fun CreateHolderRequest.toEntity(id: UUID = UUID.randomUUID()) : Holder {
@@ -17,6 +20,14 @@ fun CreateHolderRequest.toEntity(id: UUID = UUID.randomUUID()) : Holder {
         cpf = this.cpf,
         name = this.name
     )
+}
+
+fun CustomUserDetails.toTable(): UserTable {
+    return UserTable(
+        id = this.getId(),
+        username = this.username,
+        password = this.password,
+        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
 }
 
 fun Holder.toCreateResponse() : CreateHolderResponse {
