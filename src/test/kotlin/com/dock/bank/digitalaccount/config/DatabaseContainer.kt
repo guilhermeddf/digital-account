@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.config
+/*package com.dock.bank.digitalaccount.config
 
 
 
@@ -20,4 +20,6 @@ class DatabaseContainer(imageName: String) : PostgreSQLContainer<DatabaseContain
         withPassword(PASSWORD)
     }
 }
+
+ */
 

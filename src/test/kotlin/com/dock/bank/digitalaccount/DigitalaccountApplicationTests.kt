@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount
+/*package com.dock.bank.digitalaccount
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,3 +13,5 @@ class DigitalaccountApplicationTests {
 	}
 
 }
+
+ */

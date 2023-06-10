@@ -3,9 +3,11 @@ package com.dock.bank.digitalaccount.infra.postgres.converter
 import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Transaction
+import com.dock.bank.digitalaccount.core.domain.User
 import com.dock.bank.digitalaccount.infra.postgres.model.AccountTable
 import com.dock.bank.digitalaccount.infra.postgres.model.HolderTable
 import com.dock.bank.digitalaccount.infra.postgres.model.TransactionTable
+import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
 
 fun AccountTable.toEntity() : Account {
     return Account(
@@ -28,6 +30,22 @@ fun Account.toTable() : AccountTable {
         this.holder.toTable(),
         this.status,
         this.withdrawalLimit
+    )
+}
+
+fun UserTable.toEntity(): User {
+    return User(id = this.id,
+        username = this. username,
+        password = this.password,
+        role = this.role
+    )
+}
+
+fun User.toTable(): UserTable {
+    return UserTable(id = this.id,
+        username = this.username,
+        password = this.password,
+        role = this.role
     )
 }
 
