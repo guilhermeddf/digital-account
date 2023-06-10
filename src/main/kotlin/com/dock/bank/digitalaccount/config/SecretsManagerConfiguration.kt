@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.config
+/* package com.dock.bank.digitalaccount.config
 
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider
@@ -30,3 +30,5 @@ class SecretsManagerConfiguration(
         }
     }
 }
+
+ */

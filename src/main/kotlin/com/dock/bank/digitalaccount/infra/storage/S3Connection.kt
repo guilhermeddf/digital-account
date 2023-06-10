@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.storage
+/* package com.dock.bank.digitalaccount.infra.storage
 
 import com.amazonaws.AmazonServiceException
 import com.amazonaws.services.s3.AmazonS3
@@ -60,3 +60,5 @@ class S3Connection(
         }
     }
 }
+
+ */

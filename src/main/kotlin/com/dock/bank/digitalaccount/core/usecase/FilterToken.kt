@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.core.usecase
+/* package com.dock.bank.digitalaccount.core.usecase
 
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
 import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresUserRepository
@@ -34,3 +34,5 @@ class FilterToken(
         filterChain.doFilter(request, response)
     }
 }
+
+ */

@@ -1,7 +1,6 @@
 package com.dock.bank.digitalaccount.core.usecase
 
 import com.dock.bank.digitalaccount.core.domain.Account
-import com.dock.bank.digitalaccount.core.domain.Credentials
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
@@ -16,9 +15,6 @@ class AccountUseCaseImpl(
     private val accountPersistence: AccountPersistence,
     private val holderPersistence: HolderPersistence,
     private val accountGenerator: AccountGenerator,
-    //private val accountGateway: AccountGateway,
-    //private val producer: QueueProducer,
-    //private val objectMapper: ObjectMapper
 ) : AccountUseCase {
 
     companion object {
@@ -26,13 +22,9 @@ class AccountUseCaseImpl(
     }
 
     override suspend fun create(holderCpf: String): Account {
-        logger.info("Using account fake generator.")
         val storedHolder = retrieveHolder(holderCpf)
         logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
-        val account = accountPersistence.create(accountGenerator.generateAccount(storedHolder))
-        //val accountString = objectMapper.writeValueAsString(account)
-        //producer.publish(accountString)
-        return account
+        return accountPersistence.create(accountGenerator.generateAccount(storedHolder))
     }
 
     override suspend fun disable(id: UUID, status: Status) : Boolean {
@@ -47,10 +39,7 @@ class AccountUseCaseImpl(
         return accountPersistence.enable(id, status)
     }
 
-    override suspend fun get(id: UUID, credentials: Credentials): Account {
-        if(credentials.user != "guilhermeddf" || credentials.password != "1234") {
-            throw Exception("Authorization error.")
-        }
+    override suspend fun get(id: UUID): Account {
         return accountPersistence.get(id).orElseThrow {
             throw ResourceNotFoundException(message = "Account not found.")
         }

@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.sqs
+/* package com.dock.bank.digitalaccount.infra.sqs
 
 import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.model.SendMessageRequest
@@ -29,3 +29,5 @@ class SQSProducerImpl(
         }
     }
 }
+
+ */

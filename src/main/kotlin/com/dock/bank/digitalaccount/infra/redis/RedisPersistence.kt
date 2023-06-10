@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.redis
+/* package com.dock.bank.digitalaccount.infra.redis
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
@@ -49,3 +49,5 @@ class RedisPersistence(
         }
     }
 }
+
+ */

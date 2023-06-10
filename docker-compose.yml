@@ -1,32 +1,64 @@
-version: "3.4"
+version: "3.9"
 
 services:
 
   digital-account:
-    image: digital-account
-    depends_on:
-      - postgres
-      - localstack
-      - flyway
-      - zookeeper
-      - kafka
-      - redis
-
-  localstack:
-    container_name: aws-stack
-    image: localstack/localstack
+    image: digital-account-app
+    labels:
+      #com.datadoghq.ad.check_names: '[""]'
+      com.datadoghq.ad.init_configs: '[{}]'
+      com.datadoghq.ad.instances: '[{"host":"%%host%%", "port": "%%port%%"}]'
+      com.datadoghq.ad.logs: '[{"source": "go", "service": "go"}]'
+      com.datadoghq.tags.env: 'local'
+      com.datadoghq.tags.service: 'digital-account'
+      com.datadoghq.tags.version: "1"
     ports:
-      - "4566:4566"
-    environment:
-      - AWS_ACCESS_KEY_ID=dummy
-      - AWS_SECRET_ACCESS_KEY=dummy
-      - AWS_DEFAULT_REGION=us-east-1
-      - AWS_DEFAULT_OUTPUT=json
-      - SERVICES=sqs,cloudwatch
-    volumes:
-      - ./cloudformation/template:/cloudformation/template
-      - ./local/aws:/etc/localstack/init/ready.d
+      - "8080:8080"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "1"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+#  localstack:
+#    container_name: aws-stack
+#    image: localstack/localstack
+#    ports:
+#      - "4566:4566"
+#    environment:
+#      - AWS_ACCESS_KEY_ID=dummy
+#      - AWS_SECRET_ACCESS_KEY=dummy
+#      - AWS_DEFAULT_REGION=us-east-1
+#      - AWS_DEFAULT_OUTPUT=json
+#      - SERVICES=sqs,cloudwatch
+#    volumes:
+#      - ./cloudformation/template:/cloudformation/template
+#      - ./local/aws:/etc/localstack/init/ready.d
 #      - ./var/run/docker.sock:/var/run/docker.sock
+
+  datadog:
+    image: gcr.io/datadoghq/agent:7
+    container_name: dd-agent
+    restart: always
+    environment:
+      - DD_API_KEY=064804a578a39d089ffec76308fc1874
+      - DD_SITE=us5.datadoghq.com
+      - DD_HOSTNAME=localhost
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_CONTAINER_EXCLUDE=image:gcr.io/datadoghq/agent*
+      - DD_CONTAINER_EXCLUDE_METRICS=image:gcr.io/datadoghq/agent*
+      - DD_CONTAINER_EXCLUDE_LOGS=image:gcr.io/datadoghq/agent*
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      #- /opt/datadog-agent/run:/opt/datadog-agent/run:rw
 
   flyway:
     image: flyway/flyway:7.14-alpine
@@ -52,41 +84,41 @@ services:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper-container
-    networks:
-      - broker-kafka
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+#  zookeeper:
+#    image: confluentinc/cp-zookeeper:latest
+#    container_name: zookeeper-container
+#    networks:
+#      - broker-kafka
+#    environment:
+#      ZOOKEEPER_CLIENT_PORT: 2181
+#      ZOOKEEPER_TICK_TIME: 2000
 
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka-container
-    networks:
-      - broker-kafka
-    depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#  kafka:
+#    image: confluentinc/cp-kafka:latest
+#    container_name: kafka-container
+#    networks:
+#      - broker-kafka
+#    depends_on:
+#      - zookeeper
+#    ports:
+#      - "9092:9092"
+#    environment:
+#      KAFKA_BROKER_ID: 1
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  redis:
-    image: redis:6.2-alpine
-    container_name: redis-service
-    restart: always
-    ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning
-    volumes:
-      - cache:/data
+#  redis:
+#    image: redis:6.2-alpine
+#    container_name: redis-service
+#    restart: always
+#    ports:
+#      - '6379:6379'
+#    command: redis-server --save 20 1 --loglevel warning
+#    volumes:
+#      - cache:/data
 
 #  kafdrop:
 #    image: obsidiandynamics/kafdrop:latest
@@ -100,27 +132,27 @@ services:
 #    environment:
 #      KAFKA_BROKERCONNECT: kafka:29092
 
-#  prometheus:
-#    image: prom/prometheus:latest
-#    container_name: prometheus-container
-#    volumes:
-#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-#      - prometheus_data:/prometheus
-#    networks:
-#      - prometheus
-#    ports:
-#      - "9090:9090"
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-container
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - prometheus
+    ports:
+      - "9090:9090"
 
-#  grafana:
-#    image: grafana/grafana:latest
-#    container_name: grafana-container
-#    ports:
-#      - "3000:3000"
-#    networks:
-#      - prometheus
-#    volumes:
-#      - ./grafana/provisioning:/etc/grafana/provisioning
-#      - grafana_data:/var/lib/grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana-container
+    ports:
+      - "3000:3000"
+    networks:
+      - prometheus
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
 
 #  fake-service:
 #    image: mockoon/cli:1.5.1

@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.rest.controllers
+/* package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.core.service.RegisterService
 import com.dock.bank.digitalaccount.infra.rest.converter.toEntity
@@ -23,3 +23,5 @@ class RegisterController(
 
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.rest.controllers
+/* package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.core.usecase.TokenServiceImpl
 import com.dock.bank.digitalaccount.infra.rest.converter.toTable
@@ -32,3 +32,5 @@ class LoginController(
         return tokenService.tokenGenerator(userTable)
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.kafka
+/* package com.dock.bank.digitalaccount.infra.kafka
 
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
@@ -16,3 +16,5 @@ class KafkaConsumerImpl {
         logger.info(payload.value())
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.config
+/* package com.dock.bank.digitalaccount.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -30,3 +30,5 @@ class RedisConfiguration(
         return template
     }
 }
+
+ */

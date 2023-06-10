@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.kafka
+/* package com.dock.bank.digitalaccount.infra.kafka
 
 import com.dock.bank.digitalaccount.core.port.messaging.BrokerProducer
 import org.slf4j.LoggerFactory
@@ -22,3 +22,5 @@ class KafkaProducerImpl(
         }
     }
 }
+
+ */

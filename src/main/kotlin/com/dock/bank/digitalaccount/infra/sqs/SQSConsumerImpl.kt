@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.sqs
+/* package com.dock.bank.digitalaccount.infra.sqs
 
 import org.slf4j.LoggerFactory
 import org.springframework.cloud.aws.messaging.listener.SqsMessageDeletionPolicy
@@ -20,3 +20,5 @@ class SQSConsumerImpl {
         }
     }
 }
+
+ */

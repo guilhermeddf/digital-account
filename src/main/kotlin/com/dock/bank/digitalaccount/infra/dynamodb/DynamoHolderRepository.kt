@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.dynamodb
+/* package com.dock.bank.digitalaccount.infra.dynamodb
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
@@ -82,3 +82,5 @@ class DynamoHolderRepository(
         }
     }
 }
+
+ */

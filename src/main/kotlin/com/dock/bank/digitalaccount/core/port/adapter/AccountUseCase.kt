@@ -10,5 +10,5 @@ interface AccountUseCase {
     suspend fun disable(id: UUID, status: Status) : Boolean
     suspend fun block(id: UUID, status: Status): Boolean
     suspend fun enable(id: UUID, status: Status): Boolean
-    suspend fun get(id: UUID, credentials: Credentials): Account
+    suspend fun get(id: UUID): Account
 }

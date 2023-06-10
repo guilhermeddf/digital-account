@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.core.usecase
+/* package com.dock.bank.digitalaccount.core.usecase
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
@@ -25,3 +25,5 @@ class TokenServiceImpl {
             .verify(token).subject
     }
 }
+
+ */

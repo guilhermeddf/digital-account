@@ -40,16 +40,16 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
 
 	//Security
-	implementation("org.springframework.boot:spring-boot-starter-security:${property("springBootVersion")}")
-	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-	implementation("com.auth0:java-jwt:4.4.0")
+	//implementation("org.springframework.boot:spring-boot-starter-security:${property("springBootVersion")}")
+	//implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	//implementation("com.auth0:java-jwt:4.4.0")
 
 	//Metrics
 	implementation("org.springframework.boot:spring-boot-starter-actuator:${property("springBootVersion")}")
 	implementation("io.micrometer:micrometer-registry-prometheus:1.11.0")
 
 	//CircuitBreaker
-	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j:3.0.2")
+	//implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j:3.0.2")
 
 	//Documentation
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
@@ -72,16 +72,16 @@ dependencies {
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
 
 	//Redis
-	implementation("org.springframework.boot:spring-boot-starter-data-redis:${property("springBootVersion")}")
-	implementation("redis.clients:jedis:4.4.0")
+	//implementation("org.springframework.boot:spring-boot-starter-data-redis:${property("springBootVersion")}")
+	//implementation("redis.clients:jedis:4.4.0")
 
 	//AWS
-	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-	implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
-	implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
-	implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
+	//implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
+	//implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
+	//implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
+	//implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 
-	implementation("org.springframework.kafka:spring-kafka:3.0.7")
+	//implementation("org.springframework.kafka:spring-kafka:3.0.7")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
 	testImplementation("io.mockk:mockk:1.12.0")
