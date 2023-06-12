@@ -8,7 +8,7 @@ services:
       #com.datadoghq.ad.check_names: '[""]'
       com.datadoghq.ad.init_configs: '[{}]'
       com.datadoghq.ad.instances: '[{"host":"%%host%%", "port": "%%port%%"}]'
-      com.datadoghq.ad.logs: '[{"source": "go", "service": "go"}]'
+      com.datadoghq.ad.logs: '[{"source": "digital-account", "service": "digital-account"}]'
       com.datadoghq.tags.env: 'local'
       com.datadoghq.tags.service: 'digital-account'
       com.datadoghq.tags.version: "1"
@@ -44,7 +44,7 @@ services:
     container_name: dd-agent
     restart: always
     environment:
-      - DD_API_KEY=064804a578a39d089ffec76308fc1874
+      - DD_API_KEY=api-key
       - DD_SITE=us5.datadoghq.com
       - DD_HOSTNAME=localhost
       - DD_APM_ENABLED=true

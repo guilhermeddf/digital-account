@@ -5,6 +5,7 @@ import com.dock.bank.digitalaccount.infra.rest.converter.toCreateResponse
 import com.dock.bank.digitalaccount.infra.rest.converter.toEntity
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderRequest
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateHolderResponse
+import org.slf4j.MDC
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,7 +23,10 @@ class HolderController(
 ) {
     @PostMapping
     suspend fun create(@RequestBody createHolderRequest: CreateHolderRequest) : CreateHolderResponse {
-        return holderUseCase.create(createHolderRequest.toEntity()).toCreateResponse()
+        MDC.put("request", UUID.randomUUID().toString())
+        val response = holderUseCase.create(createHolderRequest.toEntity()).toCreateResponse()
+        MDC.clear()
+        return response
     }
 
     @DeleteMapping("/{id}")

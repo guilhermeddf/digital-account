@@ -5,13 +5,11 @@ import com.dock.bank.digitalaccount.core.exceptions.ResourceAlreadyExistsExcepti
 import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
 import com.dock.bank.digitalaccount.core.port.adapter.HolderUseCase
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
-import org.slf4j.LoggerFactory
 import java.util.*
 
 class HolderUseCaseImpl(
     private val holderPersistence: HolderPersistence,
 ) : HolderUseCase {
-
 
     override suspend fun create(holder: Holder): Holder {
         holder.validateCpf()

@@ -60,14 +60,16 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
 	//Logging
-	implementation("org.apache.logging.log4j:log4j-api:2.17.1")
-	implementation("org.apache.logging.log4j:log4j-to-slf4j:2.17.1")
+	implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+	implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+	implementation("net.logstash.logback:logstash-logback-encoder:7.3")
 
 	//Database
 	implementation("org.postgresql:postgresql:42.3.8")
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.2")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2")
 
@@ -85,6 +87,8 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
 	testImplementation("io.mockk:mockk:1.12.0")
+
+	testImplementation("ch.qos.logback:logback-classic:1.4.7")
 
 	// Test Container
 	testImplementation("org.testcontainers:testcontainers:${property("testcontainersVersion")}")
