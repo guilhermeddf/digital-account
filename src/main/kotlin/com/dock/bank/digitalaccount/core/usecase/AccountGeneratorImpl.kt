@@ -4,6 +4,8 @@ import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.port.adapter.AccountGenerator
+import com.dock.bank.digitalaccount.infra.rest.controllers.AccountController
+import org.slf4j.LoggerFactory
 import java.math.BigInteger
 import java.util.*
 import kotlin.random.Random
@@ -15,10 +17,12 @@ class AccountGeneratorImpl : AccountGenerator {
         const val MAX_ACCOUNT_RANDOM_NUMBER = 99999
         const val MIN_BRANCH_RANDOM_NUMBER = 1000
         const val MAX_BRANCH_RANDOM_NUMBER = 9999
+
+        private val logger = LoggerFactory.getLogger(AccountGeneratorImpl::class.java)
     }
 
      override fun generateAccount(holder: Holder) : Account {
-        return Account(
+        val account = Account(
             id = UUID.randomUUID(),
             balance = BigInteger.ZERO,
             number = generateAccountNumber(),
@@ -27,6 +31,8 @@ class AccountGeneratorImpl : AccountGenerator {
             status = Status.ACTIVATED,
             withdrawalLimit = BigInteger.valueOf(200000)
         )
+         logger.info("Account with id: ${account.id} from holder with id ${holder.id} was generated successfully.")
+         return account
     }
 
     private fun generateAccountNumber() : String {

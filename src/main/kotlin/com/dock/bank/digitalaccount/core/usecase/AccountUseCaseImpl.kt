@@ -27,27 +27,15 @@ class AccountUseCaseImpl(
         return accountPersistence.create(accountGenerator.generateAccount(storedHolder))
     }
 
-    override suspend fun disable(id: UUID, status: Status) : Boolean {
-        return accountPersistence.disable(id, status)
-    }
+    override suspend fun disable(id: UUID, status: Status) = accountPersistence.disable(id, status)
+    override suspend fun block(id: UUID, status: Status) = accountPersistence.block(id, status)
+    override suspend fun enable(id: UUID, status: Status) = accountPersistence.enable(id, status)
 
-    override suspend fun block(id: UUID, status: Status): Boolean {
-        return accountPersistence.block(id, status)
-    }
-
-    override suspend fun enable(id: UUID, status: Status): Boolean {
-        return accountPersistence.enable(id, status)
-    }
-
-    override suspend fun get(id: UUID): Account {
-        return accountPersistence.get(id).orElseThrow {
+    override suspend fun get(id: UUID): Account = accountPersistence.get(id).orElseThrow {
             throw ResourceNotFoundException(message = "Account not found.")
         }
-    }
 
-    private suspend fun retrieveHolder(holderCpf: String) : Holder {
-        return holderPersistence.findByCpf(holderCpf).orElseThrow {
+    private suspend fun retrieveHolder(holderCpf: String) = holderPersistence.findByCpf(holderCpf).orElseThrow {
             throw ResourceNotFoundException(message = "Holder not Found.")
         }
-    }
 }

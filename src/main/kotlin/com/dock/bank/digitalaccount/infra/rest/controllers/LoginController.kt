@@ -1,7 +1,7 @@
-/* package com.dock.bank.digitalaccount.infra.rest.controllers
+package com.dock.bank.digitalaccount.infra.rest.controllers
 
 import com.dock.bank.digitalaccount.core.usecase.TokenServiceImpl
-import com.dock.bank.digitalaccount.infra.rest.converter.toTable
+import com.dock.bank.digitalaccount.infra.postgres.converter.toTable
 import com.dock.bank.digitalaccount.infra.rest.dto.CreateLoginRequest
 import com.dock.bank.digitalaccount.utils.CustomUserDetails
 import org.slf4j.LoggerFactory
@@ -32,5 +32,3 @@ class LoginController(
         return tokenService.tokenGenerator(userTable)
     }
 }
-
- */

@@ -4,10 +4,8 @@ import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.domain.Transaction
 import com.dock.bank.digitalaccount.core.domain.User
-import com.dock.bank.digitalaccount.infra.postgres.model.AccountTable
-import com.dock.bank.digitalaccount.infra.postgres.model.HolderTable
-import com.dock.bank.digitalaccount.infra.postgres.model.TransactionTable
-import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
+import com.dock.bank.digitalaccount.infra.postgres.model.*
+import com.dock.bank.digitalaccount.utils.CustomUserDetails
 
 fun AccountTable.toEntity() : Account {
     return Account(
@@ -47,6 +45,14 @@ fun User.toTable(): UserTable {
         password = this.password,
         role = this.role
     )
+}
+
+fun CustomUserDetails.toTable(): UserTable {
+    return UserTable(
+        id = this.getId(),
+        username = this.username,
+        password = this.password,
+        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
 }
 
 fun Holder.toTable() : HolderTable {

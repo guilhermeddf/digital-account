@@ -25,19 +25,19 @@ class AccountPersistenceImpl(
     }
 
     override suspend fun disable(id: UUID, status: Status) : Boolean {
-        logger.info("Disabling account with id ${id}.")
+        logger.info("Disabling account with id $id changing status to: ${status.name}.")
         val result = postgresAccountRepository.disable(id, status)
         return result != 0
     }
 
     override suspend fun block(id: UUID, status: Status): Boolean {
-        logger.info("Blocking account with id ${id}.")
+        logger.info("Blocking account with id $id changing status to: ${status.name}.")
         val result = postgresAccountRepository.block(id, status)
         return result != 0
     }
 
     override suspend fun enable(id: UUID, status: Status): Boolean {
-        logger.info("Enabling account with id ${id}.")
+        logger.info("Enabling account with id $id changing status to: ${status.name}.")
         val result = postgresAccountRepository.enable(id, status)
         return result != 0
     }

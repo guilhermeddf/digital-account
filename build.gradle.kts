@@ -40,9 +40,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux:${property("springBootVersion")}")
 
 	//Security
-	//implementation("org.springframework.boot:spring-boot-starter-security:${property("springBootVersion")}")
-	//implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-	//implementation("com.auth0:java-jwt:4.4.0")
+	implementation("org.springframework.boot:spring-boot-starter-security:${property("springBootVersion")}")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("com.auth0:java-jwt:4.4.0")
 
 	//Metrics
 	implementation("org.springframework.boot:spring-boot-starter-actuator:${property("springBootVersion")}")

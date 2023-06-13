@@ -1,4 +1,4 @@
-/* package com.dock.bank.digitalaccount.config
+package com.dock.bank.digitalaccount.config
 
 import com.dock.bank.digitalaccount.core.usecase.FilterToken
 import org.springframework.context.annotation.Bean
@@ -38,5 +38,3 @@ class SecurityConfiguration(private val filterToken: FilterToken) {
         return BCryptPasswordEncoder()
     }
 }
-
- */

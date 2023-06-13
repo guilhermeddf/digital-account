@@ -3,7 +3,7 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/digital-account-service?TimeZone=UTC,schema=digital_account_service
+    url: jdbc:postgresql://postgres:5432/digital-account-service?TimeZone=UTC,schema=digital_account_service
     username: digital-account-service-app
     password: digital-account-service-app
   cache:

@@ -1,13 +1,19 @@
 package com.dock.bank.digitalaccount.core.domain
 
 import com.dock.bank.digitalaccount.core.exceptions.DomainException
-import java.util.UUID
+import com.dock.bank.digitalaccount.infra.rest.controllers.HolderController
+import org.slf4j.LoggerFactory
+import java.util.*
 
 data class Holder (
     val id : UUID,
     val cpf: String,
     val name: String
 ) {
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(HolderController::class.java)
+    }
 
     fun validateCpf()  {
         if(!validate()) {
@@ -16,6 +22,7 @@ data class Holder (
     }
 
     private fun validate() : Boolean {
+        logger.info("Validating CPF: ${this.cpf} from holder ${this.name}.")
         if (cpf.isEmpty()) return false
 
         val numbers = cpf.filter { it.isDigit() }.map {

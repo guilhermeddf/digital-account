@@ -13,18 +13,20 @@ class HolderUseCaseImpl(
 
     override suspend fun create(holder: Holder): Holder {
         holder.validateCpf()
-
         return holderPersistence.create(holder).orElseThrow {
             throw ResourceAlreadyExistsException(message = "Holder already exists.")
         }
     }
 
     override suspend fun get(cpf: String): Holder {
-        //val response = storage.read(fileName)
-        //logger.info(response)
-        return holderPersistence.findByCpf(cpf).orElseThrow{
+        return holderPersistence.findByCpf(cpf).orElseThrow {
             throw ResourceNotFoundException("Holder not found.")
         }
+    }
+
+    override suspend fun getAll(): List<Holder> {
+        return holderPersistence.getAll()
+
     }
 
     override suspend fun delete(id: UUID) {

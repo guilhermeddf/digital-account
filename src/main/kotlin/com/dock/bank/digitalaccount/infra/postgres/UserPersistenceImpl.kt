@@ -17,7 +17,7 @@ class UserPersistenceImpl(
         private val logger = LoggerFactory.getLogger(UserPersistenceImpl::class.java)
     }
     override fun create(user: User): User {
-        logger.info("Creating user with id: ${user.id}")
+        logger.info("Creating user with id: ${user.id} and username ${user.username}")
         return userRepository.save(user.toTable()).toEntity()
     }
 }

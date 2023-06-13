@@ -1,6 +1,5 @@
 package com.dock.bank.digitalaccount.infra.rest.converter
 
-//import com.dock.bank.digitalaccount.utils.CustomUserDetails
 import com.dock.bank.digitalaccount.core.domain.*
 import com.dock.bank.digitalaccount.infra.rest.dto.*
 import java.util.*
@@ -13,9 +12,17 @@ fun CreateHolderRequest.toEntity(id: UUID = UUID.randomUUID()) : Holder {
     )
 }
 
-fun CreateRegisterRequest.toEntity(id: UUID = UUID.randomUUID()): User {
+fun CreateUserRequest.toEntity(id: UUID = UUID.randomUUID()): User {
     return User(
         id = id,
+        username = this.username,
+        password = this.password,
+        role = this.role
+    )
+}
+
+fun User.toCreateUserResponse() : CreateUserResponse {
+    return CreateUserResponse(
         username = this.username,
         password = this.password,
         role = this.role
@@ -29,13 +36,6 @@ fun CreateLoginRequest.toEntity(): Login {
     )
 }
 
-//fun CustomUserDetails.toTable(): UserTable {
-//    return UserTable(
-//        id = this.getId(),
-//        username = this.username,
-//        password = this.password,
-//        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
-//}
 
 fun Holder.toCreateResponse() : CreateHolderResponse {
     return CreateHolderResponse(
@@ -55,6 +55,8 @@ fun Account.toCreateResponse() : CreateAccountResponse {
         status = this.status
     )
 }
+
+
 
 fun Account.toGetResponse() : GetAccountResponse {
     return GetAccountResponse(

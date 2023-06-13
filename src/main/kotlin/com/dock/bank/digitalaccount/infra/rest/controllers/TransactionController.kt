@@ -39,8 +39,6 @@ class TransactionController(
         return transactionUseCase.create(transaction).toCreateResponse()
     }
 
-    //Tenho ciencia que deveria ter criado aqui uma paginação, mas como resolvi usar DDD, não encontrei uma maneira simples
-    //de fazer sem ferir o core trazendo informções de "page" que não pertencem ao dominio.
     @GetMapping("/{accountId}")
      suspend fun retrieveTransactions(
         @PathVariable accountId: UUID,

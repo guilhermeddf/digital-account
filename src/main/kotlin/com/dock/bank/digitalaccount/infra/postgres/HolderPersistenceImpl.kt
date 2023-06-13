@@ -8,8 +8,7 @@ import com.dock.bank.digitalaccount.infra.postgres.converter.toTable
 import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresHolderRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Repository
-import java.util.UUID
-import java.util.Optional
+import java.util.*
 
 @Repository
 class HolderPersistenceImpl (
@@ -21,18 +20,18 @@ class HolderPersistenceImpl (
     }
 
     override suspend fun create(holder: Holder): Optional<Holder> {
-        logger.info("Creating holder with id ${holder.id}")
+        logger.info("Searching holder with cpf ${holder.cpf} on database.")
         val postgresStoredHolder = postgresHolderRepository.findHolderByCpf(holder.cpf)
         return if (postgresStoredHolder.isEmpty) {
+            logger.info("Creating holder with id ${holder.id} on database.")
             Optional.of(postgresHolderRepository.save(holder.toTable()).toEntity())
         } else {
-            logger.error("Holder already exists.")
             Optional.empty<Holder>()
         }
     }
 
     override suspend fun findByCpf(holderCpf: String): Optional<Holder> {
-        logger.info("Searching holder with CPF: $holderCpf")
+        logger.info("Searching holder with cpf $holderCpf on database.")
         val postgresStoredHolder = postgresHolderRepository.findHolderByCpf(holderCpf)
         return if (postgresStoredHolder.isEmpty) {
             Optional.empty<Holder>()
@@ -47,5 +46,10 @@ class HolderPersistenceImpl (
             return postgresHolderRepository.deleteById(id)
         }
         throw ResourceNotFoundException("Holder not found.")
+    }
+
+    override suspend fun getAll(): List<Holder> {
+        logger.info("Getting all holders on database.")
+        return postgresHolderRepository.findAll().map { it.toEntity() }
     }
 }

@@ -1,4 +1,4 @@
-/* package com.dock.bank.digitalaccount.utils
+package com.dock.bank.digitalaccount.utils
 
 import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -21,5 +21,3 @@ class CustomUserDetails(private val user: UserTable) : UserDetails {
 
     override fun isEnabled() = true
 }
-
- */
