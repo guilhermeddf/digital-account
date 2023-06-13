@@ -3,7 +3,7 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/digital-account-service?TimeZone=UTC,schema=digital_account_service
+    url: jdbc:postgresql://localhost:5432/digital-account-service?TimeZone=UTC,schema=digital_account_service
     username: digital-account-service-app
     password: digital-account-service-app
   cache:
@@ -85,3 +85,8 @@ logging:
           InstanceMetadataServiceResourceFetcher: error
         util:
           EC2MetadataUtils: error
+
+account-service:
+  auth: sample-secret-manager
+  url: http://localhost:3001/accounts/
+  timeout: 5

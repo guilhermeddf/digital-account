@@ -3,6 +3,7 @@ package com.dock.bank.digitalaccount.config
 import com.dock.bank.digitalaccount.core.usecase.FilterToken
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
@@ -17,14 +18,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true)
-class SecurityConfiguration(private val filterToken: FilterToken) {
+class SecurityConfiguration(
+    private val filterToken: FilterToken
+) {
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         return http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().authorizeHttpRequests()
-            .requestMatchers("/login").permitAll()
-            .requestMatchers("/register").permitAll()
+            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/users").permitAll()
             .anyRequest().authenticated().and().addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter::class.java).build()
     }
 

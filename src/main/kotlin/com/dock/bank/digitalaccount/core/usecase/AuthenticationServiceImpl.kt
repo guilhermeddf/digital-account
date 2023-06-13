@@ -1,6 +1,6 @@
-/* package com.dock.bank.digitalaccount.core.usecase
+package com.dock.bank.digitalaccount.core.usecase
 
-import com.dock.bank.digitalaccount.core.exceptions.ResourceNotFoundException
+import com.amazonaws.services.secretsmanager.model.ResourceNotFoundException
 import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresUserRepository
 import com.dock.bank.digitalaccount.utils.CustomUserDetails
 import org.springframework.security.core.userdetails.UserDetails
@@ -15,5 +15,3 @@ class AuthenticationServiceImpl(private val userRepository: PostgresUserReposito
         })
     }
 }
-
- */

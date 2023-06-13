@@ -85,3 +85,8 @@ logging:
           InstanceMetadataServiceResourceFetcher: error
         util:
           EC2MetadataUtils: error
+
+account-service:
+  auth: sample-secret-manager
+  url: http://localhost:3001/accounts/
+  timeout: 5

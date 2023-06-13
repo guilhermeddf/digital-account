@@ -21,12 +21,14 @@ class TokenServiceImpl {
             .withClaim("id", user.id.toString())
             .withExpiresAt(LocalDateTime.now().plusMinutes(30).toInstant(ZoneOffset.of("-03:00")))
             .sign(Algorithm.HMAC256("secret"))
+
     }
 
     fun getSubject(token: String): String {
         logger.info("Getting subject from JWT token.")
-        return JWT.require(Algorithm.HMAC256("secret"))
-            .withIssuer("test").build()
-            .verify(token).subject
+        val response = JWT.require(Algorithm.HMAC256("secret"))
+            .withIssuer("test")
+            .build().verify(token).subject
+        return response
     }
 }

@@ -1,8 +1,8 @@
 package com.dock.bank.digitalaccount.core.service
 
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import com.dock.bank.digitalaccount.core.domain.User
 import com.dock.bank.digitalaccount.core.port.persistence.UserPersistence
-import com.dock.bank.digitalaccount.infra.rest.controllers.UserController
 import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service

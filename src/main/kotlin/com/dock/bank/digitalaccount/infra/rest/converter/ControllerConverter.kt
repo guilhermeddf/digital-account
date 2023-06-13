@@ -1,6 +1,7 @@
 package com.dock.bank.digitalaccount.infra.rest.converter
 
 import com.dock.bank.digitalaccount.core.domain.*
+import com.dock.bank.digitalaccount.infra.postgres.model.Role
 import com.dock.bank.digitalaccount.infra.rest.dto.*
 import java.util.*
 
@@ -17,7 +18,7 @@ fun CreateUserRequest.toEntity(id: UUID = UUID.randomUUID()): User {
         id = id,
         username = this.username,
         password = this.password,
-        role = this.role
+        role = Role.valueOf(this.role)
     )
 }
 

@@ -10,7 +10,7 @@
     {
       "uuid": "904d91eb-2df1-49bb-959a-35c446ae05c3",
       "documentation": "",
-      "method": "get",
+      "method": "post",
       "endpoint": "accounts/:param",
       "responses": [
         {

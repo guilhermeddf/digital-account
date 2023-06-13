@@ -10,17 +10,20 @@ import org.slf4j.LoggerFactory
 import org.slf4j.MDC
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
+@RequestMapping("/users")
 class UserController(
     private val registerService: RegisterService
 ) {
     companion object {
         private val logger = LoggerFactory.getLogger(UserController::class.java)
     }
-    @PostMapping("/users")
+
+    @PostMapping
     fun register(@RequestBody userRequest: CreateUserRequest): CreateUserResponse {
         val requestId = UUID.randomUUID()
         val user = userRequest.toEntity()
