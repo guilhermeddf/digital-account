@@ -1,4 +1,4 @@
-/* package com.dock.bank.digitalaccount.infra.secretsManager
+package com.dock.bank.digitalaccount.infra.secretsManager
 
 import com.amazonaws.services.secretsmanager.AWSSecretsManager
 import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest
@@ -28,5 +28,3 @@ class SecretManagerImpl(
         }
     }
 }
-
- */

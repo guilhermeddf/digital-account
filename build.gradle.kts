@@ -79,7 +79,7 @@ dependencies {
 
 	//AWS
 	//implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
-	//implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
+	implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
 	//implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
 	//implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 

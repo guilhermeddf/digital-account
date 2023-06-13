@@ -45,7 +45,7 @@ Resources:
     Type: AWS::SecretsManager::Secret
     Properties: 
       Name: sample-secret-manager
-      SecretString: '{\"user\":\"guilhermeddf\",\"password\":\"1234\"}'
+      SecretString: '{\"password\":\"xyz\"}'
 
 #  LambdaFunctionRole:
 #    Type: AWS::IAM::Role
