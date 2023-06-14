@@ -32,6 +32,7 @@ class HolderController(
 
         logger.info("Initializing POST request to /holders endpoint with id: ${holder.id}.")
         val response = holderUseCase.create(holder).toCreateResponse()
+        logger.info("Holder created with id ${response.id}")
         MDC.clear()
         return response
     }
@@ -42,6 +43,7 @@ class HolderController(
         MDC.put("request_id", requestId.toString())
         logger.info("Initializing GET request to /holders/{cpf} endpoint with cpf: $cpf.")
         val response = holderUseCase.get(cpf).toCreateResponse()
+        logger.info("Holder returned with id: ${response.id}")
         MDC.clear()
         return response
     }
@@ -52,6 +54,7 @@ class HolderController(
         MDC.put("request_id", requestId.toString())
         logger.info("Initializing GET request to /holders endpoint.")
         val response = holderUseCase.getAll()
+        logger.info("List of holders returned with success.")
         MDC.clear()
         return response
     }
@@ -64,6 +67,7 @@ class HolderController(
 
         logger.info("Initializing DELETE request to /holders/{id} endpoint with id: $id.")
         holderUseCase.delete(id)
+        logger.info("Holder deleted with id: $id.")
         MDC.clear()
         return ResponseEntity.ok(Unit)
     }

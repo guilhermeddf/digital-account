@@ -34,6 +34,7 @@ class UserController(
 
         logger.info("Initializing POST request to /users endpoint with account username: ${userRequest.username}.")
         val response = registerService.register(user)
+        logger.info("User created with id ${response.id}.")
         MDC.clear()
         return response.toCreateUserResponse()
     }
