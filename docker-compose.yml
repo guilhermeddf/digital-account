@@ -202,3 +202,8 @@ volumes:
   prometheus_data:
   grafana_data:
 
+#https://github.com/rbailen/Hexagonal-Architecture
+#https://github.com/wesleyosantos91/poc-multi-module-arch-hexagonal-springboot
+#https://github.com/gisiona/apirest-with-java-springboot-arquitetura-hexagonal
+#https://github.com/MarioJunio/base-spring-cloud
+#https://betterprogramming.pub/hexagonal-architecture-with-spring-boot-74e93030eba3
