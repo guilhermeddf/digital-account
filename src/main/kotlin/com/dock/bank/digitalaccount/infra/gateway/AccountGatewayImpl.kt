@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component
 @Component
 class AccountGatewayImpl(
     private val accountClient: AccountClient,
-    @Value("\${account-service.auth}") private val auth: String,
+    @Value("\${account-service.auth}") private val authorization: String,
     private val credentialsManager: CredentialsManager
 ): AccountGateway {
     override suspend fun generateAccount(holder: Holder): Account? {
-        val credentials = credentialsManager.getCredentials(auth)
+        val credentials = credentialsManager.getCredentials(authorization)
         return accountClient.generateAccount(holder, credentials.password).body
     }
 }

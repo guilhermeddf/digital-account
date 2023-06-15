@@ -23,7 +23,7 @@ services:
 #        max-file: "1"
 
   localstack:
-    container_name: aws-stack
+    container_name: aws-container
     image: localstack/localstack
     ports:
       - "4566:4566"
@@ -37,6 +37,31 @@ services:
       - ./cloudformation/template:/cloudformation/template
       - ./local/aws:/etc/localstack/init/ready.d
       - ./var/run/docker.sock:/var/run/docker.sock
+
+
+  flyway:
+    image: flyway/flyway:7.14-alpine
+    container_name: flyway-container
+    command: -url=jdbc:postgresql://postgres:5432/digital-account-service -schemas=digital_account_service -user=digital-account-service-migration -password=digital-account-service-migration migrate
+    volumes:
+      - ./src/main/resources/db/migration:/flyway/sql
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres-container
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "mM@md38d23"
+    volumes:
+      - ./local/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
 
 #  datadog:
 #    image: gcr.io/datadoghq/agent:7
@@ -58,30 +83,6 @@ services:
 #      - /proc/:/host/proc/:ro
 #      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
 #      #- /opt/datadog-agent/run:/opt/datadog-agent/run:rw
-
-  flyway:
-    image: flyway/flyway:7.14-alpine
-    container_name: digital-account-flyway
-    command: -url=jdbc:postgresql://postgres:5432/digital-account-service -schemas=digital_account_service -user=digital-account-service-migration -password=digital-account-service-migration migrate
-    volumes:
-      - ./src/main/resources/db/migration:/flyway/sql
-    depends_on:
-      - postgres
-
-  postgres:
-    image: postgres
-    container_name: digital-account-postgres
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 1s
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: "mM@md38d23"
-    volumes:
-      - ./local/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
-      - postgresql:/var/lib/postgresql
-      - postgresql_data:/var/lib/postgresql/data
 
 #  zookeeper:
 #    image: confluentinc/cp-zookeeper:latest
@@ -188,7 +189,6 @@ services:
 networks:
   k6:
   grafana:
-  gitlab:
   prometheus:
     driver: bridge
   broker-kafka:

@@ -25,8 +25,6 @@ class AccountClientImpl(
     companion object {
         private val logger = LoggerFactory.getLogger(AccountClientImpl::class.java)
     }
-    val URL = "http://localhost:3001"
-    val PATH = "/accounts/"
 
     override fun generateAccount(holder: Holder, auth: String) : ResponseEntity<Account> {
         try {
