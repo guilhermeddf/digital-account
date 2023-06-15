@@ -31,6 +31,7 @@ subprojects {
 			property ("sonar.projectKey", "guilhermeddf_digital-account")
 			property ("sonar.organization", "guilhermeddf")
 			property ("sonar.host.url", "https://sonarcloud.io")
+			property("sonar.junit.reportPaths","${project.projectDir}/build/reports/jacoco/test/")
 		}
 	}
 }
