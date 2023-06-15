@@ -26,6 +26,7 @@ class HolderPersistenceImpl (
             logger.info("Creating holder with id ${holder.id} on database.")
             Optional.of(postgresHolderRepository.save(holder.toTable()).toEntity())
         } else {
+            logger.error("Holder with id: ${holder.id} and username: ${holder.name} its already on database.")
             Optional.empty<Holder>()
         }
     }
