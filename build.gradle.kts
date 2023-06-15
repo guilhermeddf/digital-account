@@ -14,6 +14,7 @@ plugins {
 	kotlin("plugin.spring") version "1.7.22"
 	kotlin("plugin.jpa") version "1.7.22"
 	id("org.sonarqube") version "3.5.0.2730"
+	id("jacoco")
 }
 
 sonarqube {
@@ -22,6 +23,21 @@ sonarqube {
 		property ("sonar.organization", "guilhermeddf")
 		property ("sonar.host.url", "https://sonarcloud.io")
 	}
+}
+
+subprojects {
+	sonarqube {
+		properties {
+			property ("sonar.projectKey", "guilhermeddf_digital-account")
+			property ("sonar.organization", "guilhermeddf")
+			property ("sonar.host.url", "https://sonarcloud.io")
+			property("sonar.junit.reportPaths","${project.projectDir}/build/reports/jacoco/test/")
+		}
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.8"
 }
 
 group = "com.dock.bank"
@@ -113,13 +129,23 @@ dependencyManagement {
 	}
 }
 
+tasks.withType<JacocoReport> {
+	reports {
+		xml.required.set(true)
+		html.required.set(false)
+		csv.required.set(false)
+	}
+	dependsOn(tasks.test)
+}
+
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport)
+	useJUnitPlatform()
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "17"
 	}
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
 }
