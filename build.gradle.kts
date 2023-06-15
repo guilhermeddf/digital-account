@@ -24,6 +24,21 @@ sonarqube {
 	}
 }
 
+subprojects {
+	sonarqube {
+		properties {
+			property ("sonar.projectKey", "guilhermeddf_digital-account")
+			property ("sonar.organization", "guilhermeddf")
+			property ("sonar.host.url", "https://sonarcloud.io")
+			property("sonar.junit.reportPaths","${project.projectDir}/build/reports/jacoco/test/")
+		}
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.8"
+}
+
 group = "com.dock.bank"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -113,6 +128,20 @@ dependencyManagement {
 	}
 }
 
+tasks.withType<JacocoReport> {
+	reports {
+		xml.required.set(true)
+		html.required.set(false)
+		csv.required.set(false)
+	}
+	dependsOn(tasks.test)
+}
+
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport)
+	useJUnitPlatform()
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -120,6 +149,10 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs = listOf("-Xjsr305=strict")
+		jvmTarget = "17"
+	}
 }
