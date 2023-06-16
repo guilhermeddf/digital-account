@@ -8,10 +8,15 @@ plugins {
     id("application")
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
+    id("jacoco")
 }
 
 application {
     mainClass.set("com.dock.bank.digitalaccount.Application")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 group = "com.dock.bank.digitalaccount"
@@ -28,13 +33,23 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
 }
 
+tasks.withType<JacocoReport> {
+    reports {
+        xml.required.set(true)
+        html.required.set(false)
+        csv.required.set(false)
+    }
+    dependsOn(tasks.test)
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+    useJUnitPlatform()
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17"
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }

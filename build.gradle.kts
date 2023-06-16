@@ -84,6 +84,7 @@ dependencies {
 	//Database
 	implementation("org.postgresql:postgresql:42.3.8")
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
