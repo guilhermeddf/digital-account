@@ -1,7 +1,6 @@
 package com.dock.bank.digitalaccount.core.domain
 
-import com.dock.bank.digitalaccount.core.exceptions.DomainException
-import com.dock.bank.digitalaccount.infra.rest.controllers.HolderController
+import com.dock.bank.digitalaccount.core.exception.DomainException
 import org.slf4j.LoggerFactory
 import java.util.*
 
@@ -12,7 +11,7 @@ data class Holder (
 ) {
 
     companion object {
-        private val logger = LoggerFactory.getLogger(HolderController::class.java)
+        private val logger = LoggerFactory.getLogger(Holder::class.java)
     }
 
     fun validateCpf()  {

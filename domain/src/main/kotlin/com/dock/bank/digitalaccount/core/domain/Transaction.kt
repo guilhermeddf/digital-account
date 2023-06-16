@@ -1,9 +1,9 @@
 package com.dock.bank.digitalaccount.core.domain
 
-import com.dock.bank.digitalaccount.core.exceptions.DomainException
+import com.dock.bank.digitalaccount.core.exception.DomainException
 import java.math.BigInteger
 import java.time.OffsetDateTime
-import java.util.UUID
+import java.util.*
 
 data class Transaction (
     val id: UUID,
