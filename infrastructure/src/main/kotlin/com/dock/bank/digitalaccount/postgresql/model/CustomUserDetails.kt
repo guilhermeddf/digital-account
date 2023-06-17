@@ -1,6 +1,5 @@
 package com.dock.bank.digitalaccount.postgresql.model
 
-import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 

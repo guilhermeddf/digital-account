@@ -1,22 +1,24 @@
-package com.dock.bank.digitalaccount.security
+/*package com.dock.bank.digitalaccount.security
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import com.dock.bank.digitalaccount.infra.postgres.model.Role
-import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
+import com.dock.bank.digitalaccount.core.domain.Role
+import com.dock.bank.digitalaccount.core.domain.User
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.stream.Collectors
 
 
+@Service
 class TokenServiceImpl {
     companion object {
         private val logger = LoggerFactory.getLogger(TokenServiceImpl::class.java)
     }
 
-    fun tokenGenerator(user: UserTable): String {
+    fun tokenGenerator(user: User): String {
         logger.info("Generating access token to user with id: ${user.id} and username ${user.username}.")
 
         val authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(Role.ADMIN.name)
@@ -39,3 +41,5 @@ class TokenServiceImpl {
         return response
     }
 }
+
+ */

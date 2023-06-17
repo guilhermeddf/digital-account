@@ -1,6 +1,6 @@
 package com.dock.bank.digitalaccount.infra.postgres.repository
 
-import com.dock.bank.digitalaccount.infra.postgres.model.UserTable
+import com.dock.bank.digitalaccount.postgresql.model.UserTable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

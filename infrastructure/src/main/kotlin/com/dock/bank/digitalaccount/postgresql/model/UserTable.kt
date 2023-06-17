@@ -1,5 +1,6 @@
-package com.dock.bank.digitalaccount.infra.postgres.model
+package com.dock.bank.digitalaccount.postgresql.model
 
+import com.dock.bank.digitalaccount.core.domain.Role
 import jakarta.persistence.*
 import java.util.UUID
 

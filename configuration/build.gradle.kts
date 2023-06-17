@@ -19,7 +19,10 @@ repositories {
 }
 
 dependencies {
-
+    implementation(project(":domain"))
+    implementation(project(":infrastructure"))
+    implementation("org.springframework.boot:spring-boot-starter:3.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-security:${property("springBootVersion")}")
 }
 
 tasks.withType<JacocoReport> {

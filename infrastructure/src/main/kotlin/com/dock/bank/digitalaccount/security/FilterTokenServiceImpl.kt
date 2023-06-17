@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.security
+/* package com.dock.bank.digitalaccount.security
 
 
 import com.dock.bank.digitalaccount.core.exception.ResourceNotFoundException
@@ -35,3 +35,5 @@ class FilterTokenServiceImpl(
         filterChain.doFilter(request, response)
     }
 }
+
+ */
