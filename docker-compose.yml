@@ -34,8 +34,8 @@ services:
       - AWS_DEFAULT_OUTPUT=json
       - SERVICES=sqs,cloudwatch
     volumes:
-      - ./cloudformation/template:/cloudformation/template
-      - ./local/aws:/etc/localstack/init/ready.d
+      - ./configuration/cloudformation/template:/cloudformation/template
+      - ./configuration/aws:/etc/localstack/init/ready.d
       - ./var/run/docker.sock:/var/run/docker.sock
 
 
@@ -44,7 +44,7 @@ services:
     container_name: flyway-container
     command: -url=jdbc:postgresql://postgres:5432/digital-account-service -schemas=digital_account_service -user=digital-account-service-migration -password=digital-account-service-migration migrate
     volumes:
-      - ./src/main/resources/db/migration:/flyway/sql
+      - ./application/src/main/resources/migration:/flyway/sql
     depends_on:
       - postgres
 
@@ -59,7 +59,7 @@ services:
     environment:
       POSTGRES_PASSWORD: "mM@md38d23"
     volumes:
-      - ./local/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
+      - ./configuration/postgresql/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
 
@@ -136,7 +136,7 @@ services:
 #    image: prom/prometheus:latest
 #    container_name: prometheus-container
 #    volumes:
-#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#      - ./configuration/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 #      - prometheus_data:/prometheus
 #    networks:
 #      - prometheus
@@ -151,7 +151,7 @@ services:
 #    networks:
 #      - prometheus
 #    volumes:
-#      - ./grafana/provisioning:/etc/grafana/provisioning
+#      - ./configuration/grafana/provisioning:/etc/grafana/provisioning
 #      - grafana_data:/var/lib/grafana
 
 #  fake-service:
@@ -161,7 +161,7 @@ services:
 #      - "3001:3001"
 #    command: -d /data -i 0 -p 3001
 #    volumes:
-#      - ./local/mockoon/data.json:/data
+#      - ./configuration/mockoon/data.json:/data
 
 #  influxdb:
 #    image: influxdb:1.8
@@ -182,7 +182,7 @@ services:
 #    environment:
 #      - K6_OUT=influxdb=http://influxdb:8086/k6
 #    volumes:
-#     - ./loadtest/scripts:/scripts
+#     - ./configuration/k6:/scripts
 #    extra_hosts:
 #      - "host.docker.internal:host-gateway"
 
