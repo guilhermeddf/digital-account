@@ -4,8 +4,6 @@ services:
 
 #  digital-account:
 #    image: digital-account-app
-#    environment:
-#      - Dspring.profiles.active=docker
 #    labels:
 #      #com.datadoghq.ad.check_names: '[""]'
 #      com.datadoghq.ad.init_configs: '[{}]'
