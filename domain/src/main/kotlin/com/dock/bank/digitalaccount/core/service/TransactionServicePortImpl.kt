@@ -14,8 +14,8 @@ import java.time.LocalDate
 import java.util.*
 
 class TransactionServicePortImpl(
-    private val transactionPersistence: TransactionDatabasePort,
-    private val accountPersistence: AccountDatabasePort
+    private val transactionDatabasePort: TransactionDatabasePort,
+    private val accountDatabasePort: AccountDatabasePort
 ) : TransactionServicePort {
 
     override suspend fun create(transaction: Transaction): Transaction {
@@ -38,15 +38,15 @@ class TransactionServicePortImpl(
             val account = transaction.accountWithdraw()
             val newTransaction = transaction.copy(account = account)
 
-            accountPersistence.create(account)
-            transactionPersistence.create(newTransaction)
+            accountDatabasePort.create(account)
+            transactionDatabasePort.create(newTransaction)
 
         } else {
             val account = transaction.accountDeposit()
             val newTransaction = transaction.copy(account = account)
 
-            accountPersistence.create(account)
-            transactionPersistence.create(newTransaction)
+            accountDatabasePort.create(account)
+            transactionDatabasePort.create(newTransaction)
         }
     }
 
@@ -55,13 +55,12 @@ class TransactionServicePortImpl(
         startDate: LocalDate,
         finishDate: LocalDate
     ): List<Transaction> {
-        val account = accountPersistence.get(accountId).orElseThrow {
+        val account = accountDatabasePort.get(accountId).orElseThrow {
             throw ResourceNotFoundException(message = "Account not found.")
         }
-        return transactionPersistence.getTransactions(startDate, finishDate, account)
+        return transactionDatabasePort.getTransactions(startDate, finishDate, account)
     }
 
-    private suspend fun getDailyDebitTransactionSum(date: LocalDate, account: Account, type: TransactionType) : Int {
-        return transactionPersistence.sumDailyDebitTransactionsAmountByAccount(date, account, type)
-    }
+    private suspend fun getDailyDebitTransactionSum(date: LocalDate, account: Account, type: TransactionType) =
+        transactionDatabasePort.sumDailyDebitTransactionsAmountByAccount(date, account, type)
 }

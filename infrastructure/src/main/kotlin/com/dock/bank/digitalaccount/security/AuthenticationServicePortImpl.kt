@@ -2,7 +2,7 @@
 
 import com.dock.bank.digitalaccount.core.domain.Login
 import com.dock.bank.digitalaccount.core.exception.ResourceNotFoundException
-import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresUserRepository
+import com.dock.bank.digitalaccount.postgresql.repository.PostgresUserRepository
 import com.dock.bank.digitalaccount.ports.spi.AuthenticationServicePort
 import com.dock.bank.digitalaccount.postgresql.mapper.toEntity
 import com.dock.bank.digitalaccount.postgresql.mapper.toTable

@@ -9,10 +9,13 @@ import com.dock.bank.digitalaccount.postgresql.mapper.toTable
 import com.dock.bank.digitalaccount.postgresql.repository.PostgresTransactionRepository
 import com.dock.bank.digitalaccount.utils.DateUtils
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Primary
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
-@Repository
+@Component
+@Primary
 class TransactionPostgresAdapter(
     private val postgresTransactionRepository: PostgresTransactionRepository
 ) : TransactionDatabasePort {
@@ -31,12 +34,14 @@ class TransactionPostgresAdapter(
         finishDate: LocalDate,
         account: Account
     ): List<Transaction> {
-        logger.info("Getting transactions with startDate: $startDate, finishDate: $finishDate, account: ${account.id}")
-        return postgresTransactionRepository.getTransactionsByStartDateAndFinishDateAndAccount(
+        logger.info("Getting transactions with startDate: $startDate, finishDate: $finishDate and account id: ${account.id}")
+        val response = postgresTransactionRepository.getTransactionsByStartDateAndFinishDateAndAccount(
             startDate = DateUtils.getStartDate(startDate),
             finishDate = DateUtils.getFinishDate(finishDate),
             account = account.toTable(),
-        ).map { transactionTable -> transactionTable.toEntity() }
+        )
+
+        return response.map { transactionTable -> transactionTable.toEntity() }
     }
 
     override suspend fun sumDailyDebitTransactionsAmountByAccount(

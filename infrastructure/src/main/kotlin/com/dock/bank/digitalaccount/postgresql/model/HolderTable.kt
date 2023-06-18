@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.postgres.model
+package com.dock.bank.digitalaccount.postgresql.model
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

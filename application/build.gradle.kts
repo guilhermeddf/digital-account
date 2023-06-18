@@ -3,16 +3,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 extra["springBootVersion"] = "3.1.0"
 
 plugins {
-    id("org.springframework.boot") version "3.1.0"
-    id("io.spring.dependency-management") version "1.1.0"
-    id("application")
     kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
+    //kotlin("plugin.spring") version "1.7.22"
     id("jacoco")
-}
-
-application {
-    mainClass.set("com.dock.bank.digitalaccount.Application")
 }
 
 jacoco {
@@ -31,9 +24,6 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":infrastructure"))
-    implementation(project(":configuration"))
-
     implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
 }
 

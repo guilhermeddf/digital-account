@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.api.v1.controller
+/*package com.dock.bank.digitalaccount.api.v1.controller
 
 import com.dock.bank.digitalaccount.api.v1.mapper.toEntity
 import com.dock.bank.digitalaccount.api.v1.mapper.toResponse
@@ -35,3 +35,5 @@ class LoginController(
         return response.toResponse()
     }
 }
+
+ */

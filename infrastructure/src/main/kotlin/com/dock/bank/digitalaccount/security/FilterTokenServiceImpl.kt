@@ -2,7 +2,7 @@
 
 
 import com.dock.bank.digitalaccount.core.exception.ResourceNotFoundException
-import com.dock.bank.digitalaccount.infra.postgres.repository.PostgresUserRepository
+import com.dock.bank.digitalaccount.postgresql.repository.PostgresUserRepository
 import com.dock.bank.digitalaccount.postgresql.model.CustomUserDetails
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest

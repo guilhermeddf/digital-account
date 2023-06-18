@@ -18,18 +18,10 @@ class HolderServicePortImpl(
         }
     }
 
-    override suspend fun get(cpf: String): Holder {
-        return holderDatabasePort.findByCpf(cpf).orElseThrow {
+    override suspend fun get(cpf: String): Holder = holderDatabasePort.findByCpf(cpf).orElseThrow {
             throw ResourceNotFoundException("Holder not found.")
-        }
     }
 
-    override suspend fun getAll(): List<Holder> {
-        return holderDatabasePort.getAll()
-
-    }
-
-    override suspend fun delete(id: UUID) {
-        return holderDatabasePort.delete(id)
-    }
+    override suspend fun getAll() = holderDatabasePort.getAll()
+    override suspend fun delete(id: UUID) = holderDatabasePort.delete(id)
 }

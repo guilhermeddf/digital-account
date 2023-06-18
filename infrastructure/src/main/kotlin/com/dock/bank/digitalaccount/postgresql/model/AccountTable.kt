@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.postgres.model
+package com.dock.bank.digitalaccount.postgresql.model
 
 import com.dock.bank.digitalaccount.core.domain.Status
 import jakarta.persistence.*

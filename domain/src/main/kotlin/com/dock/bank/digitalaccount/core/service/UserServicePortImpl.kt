@@ -10,7 +10,6 @@ class UserServicePortImpl(
     private val userDatabasePort: UserDatabasePort
 ): UserServicePort {
 
-    override fun create(user: User) : User {
-        return userDatabasePort.create(user)
-    }
+    override fun create(user: User) = userDatabasePort.create(user)
+
 }

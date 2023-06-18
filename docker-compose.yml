@@ -44,7 +44,7 @@ services:
     container_name: flyway-container
     command: -url=jdbc:postgresql://postgres:5432/digital-account-service -schemas=digital_account_service -user=digital-account-service-migration -password=digital-account-service-migration migrate
     volumes:
-      - ./application/src/main/resources/migration:/flyway/sql
+      - ./launcher/src/main/resources/migration:/flyway/sql
     depends_on:
       - postgres
 

@@ -1,8 +1,9 @@
 package com.dock.bank.digitalaccount.postgresql.mapper
 
 import com.dock.bank.digitalaccount.core.domain.*
-import com.dock.bank.digitalaccount.infra.postgres.model.*
-import com.dock.bank.digitalaccount.postgresql.model.CustomUserDetails
+import com.dock.bank.digitalaccount.postgresql.model.AccountTable
+import com.dock.bank.digitalaccount.postgresql.model.HolderTable
+import com.dock.bank.digitalaccount.postgresql.model.TransactionTable
 import com.dock.bank.digitalaccount.postgresql.model.UserTable
 
 
@@ -46,21 +47,21 @@ fun User.toTable(): UserTable {
     )
 }
 
-fun CustomUserDetails.toTable(): UserTable {
-    return UserTable(
-        id = this.getId(),
-        username = this.username,
-        password = this.password,
-        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
-}
+//fun CustomUserDetails.toTable(): UserTable {
+//    return UserTable(
+//        id = this.getId(),
+//        username = this.username,
+//        password = this.password,
+//        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
+//}
 
-fun CustomUserDetails.toEntity(): User {
-    return User(
-        id = this.getId(),
-        username = this.username,
-        password = this.password,
-        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
-}
+//fun CustomUserDetails.toEntity(): User {
+//    return User(
+//        id = this.getId(),
+//        username = this.username,
+//        password = this.password,
+//        role = Role.valueOf(this.authorities.stream().findFirst().get().authority))
+//}
 
 fun Holder.toTable() : HolderTable {
     return HolderTable(

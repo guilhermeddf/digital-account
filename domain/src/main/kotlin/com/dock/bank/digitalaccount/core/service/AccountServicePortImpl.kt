@@ -7,7 +7,6 @@ import com.dock.bank.digitalaccount.ports.api.AccountGeneratorServicePort
 import com.dock.bank.digitalaccount.ports.api.AccountServicePort
 import com.dock.bank.digitalaccount.ports.spi.AccountDatabasePort
 import com.dock.bank.digitalaccount.ports.spi.HolderDatabasePort
-import org.slf4j.LoggerFactory
 import java.util.*
 
 class AccountServicePortImpl(
@@ -16,13 +15,9 @@ class AccountServicePortImpl(
     private val accountGenerator: AccountGeneratorServicePort,
 ) : AccountServicePort {
 
-    companion object {
-        private val logger = LoggerFactory.getLogger(AccountServicePortImpl::class.java)
-    }
 
     override suspend fun create(holderCpf: String): Account {
         val storedHolder = retrieveHolder(holderCpf)
-        logger.info("Holder with id ${storedHolder.id} was successfully retrieved.")
         return accountPersistence.create(accountGenerator.generateAccount(storedHolder))
     }
 

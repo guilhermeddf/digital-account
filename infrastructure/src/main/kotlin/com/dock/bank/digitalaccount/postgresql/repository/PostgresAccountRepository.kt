@@ -1,7 +1,7 @@
 package com.dock.bank.digitalaccount.postgresql.repository
 
 import com.dock.bank.digitalaccount.core.domain.Status
-import com.dock.bank.digitalaccount.infra.postgres.model.AccountTable
+import com.dock.bank.digitalaccount.postgresql.model.AccountTable
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying

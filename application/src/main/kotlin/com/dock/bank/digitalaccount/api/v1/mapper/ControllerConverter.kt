@@ -15,8 +15,6 @@ fun CreateHolderRequest.toEntity(id: UUID = UUID.randomUUID()) : Holder {
     )
 }
 
-
-
 fun CreateUserRequest.toEntity(id: UUID = UUID.randomUUID()): User {
     return User(
         id = id,

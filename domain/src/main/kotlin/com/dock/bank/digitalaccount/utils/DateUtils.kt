@@ -16,7 +16,7 @@ object DateUtils {
         0,
         0,
         0,
-        ZoneOffset.UTC
+        ZoneOffset.ofHours(-3)
     )
 
     fun getFinishDate(
@@ -29,7 +29,7 @@ object DateUtils {
         59,
         59,
         0,
-        ZoneOffset.UTC
+        ZoneOffset.ofHours(-3)
     )
 
     fun getLocalDate(

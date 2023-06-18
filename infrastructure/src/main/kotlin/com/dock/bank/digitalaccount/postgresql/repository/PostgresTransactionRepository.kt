@@ -1,8 +1,8 @@
 package com.dock.bank.digitalaccount.postgresql.repository
 
 import com.dock.bank.digitalaccount.core.domain.TransactionType
-import com.dock.bank.digitalaccount.infra.postgres.model.AccountTable
-import com.dock.bank.digitalaccount.infra.postgres.model.TransactionTable
+import com.dock.bank.digitalaccount.postgresql.model.AccountTable
+import com.dock.bank.digitalaccount.postgresql.model.TransactionTable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -21,7 +21,7 @@ interface PostgresTransactionRepository : JpaRepository<TransactionTable, UUID> 
         @Param("type") type: TransactionType
     ) : Int?
 
-    @Query(value = "FROM TransactionTable tt WHERE tt.createdDate BETWEEN :startDate AND :finishDate AND tt.account = :account")
+    @Query(value = "FROM TransactionTable tt WHERE tt.createdDate >= :startDate AND tt.createdDate <= :finishDate AND tt.account = :account")
     fun getTransactionsByStartDateAndFinishDateAndAccount(
         @Param("startDate") startDate: OffsetDateTime,
         @Param("finishDate") finishDate: OffsetDateTime,

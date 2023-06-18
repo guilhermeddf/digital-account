@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.postgresql.model
+/*package com.dock.bank.digitalaccount.postgresql.model
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -15,3 +15,5 @@ class CustomUserDetails(private val user: UserTable) : UserDetails {
     override fun isCredentialsNonExpired() = true
     override fun isEnabled() = true
 }
+
+ */

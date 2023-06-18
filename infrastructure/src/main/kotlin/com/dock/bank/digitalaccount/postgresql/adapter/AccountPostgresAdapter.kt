@@ -7,10 +7,13 @@ import com.dock.bank.digitalaccount.postgresql.mapper.toTable
 import com.dock.bank.digitalaccount.ports.spi.AccountDatabasePort
 import com.dock.bank.digitalaccount.postgresql.repository.PostgresAccountRepository
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Primary
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import java.util.UUID
 import java.util.Optional
-@Repository
+@Component
+@Primary
 class AccountPostgresAdapter(
     private val postgresAccountRepository: PostgresAccountRepository
 ) : AccountDatabasePort {

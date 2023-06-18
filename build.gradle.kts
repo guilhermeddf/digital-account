@@ -73,8 +73,9 @@ dependencies {
 
 	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
 
 	//Logging
 	implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")

@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.infra.postgres.model
+package com.dock.bank.digitalaccount.postgresql.model
 
 import com.dock.bank.digitalaccount.core.domain.TransactionType
 import jakarta.persistence.*
@@ -27,4 +27,5 @@ data class TransactionTable (
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id")
     val account: AccountTable
-)
+) {
+}

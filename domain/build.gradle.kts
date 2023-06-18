@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+extra["springBootVersion"] = "3.1.0"
+
 plugins {
     id("jacoco")
     kotlin("jvm") version "1.7.22"
@@ -20,10 +22,14 @@ repositories {
 
 dependencies {
 
-    //Logging
-    implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
-    implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
-    implementation("net.logstash.logback:logstash-logback-encoder:7.3")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+
+    //Tests
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${property("springBootVersion")}")
+    testImplementation("io.mockk:mockk:1.12.0")
 }
 
 tasks.withType<JacocoReport> {

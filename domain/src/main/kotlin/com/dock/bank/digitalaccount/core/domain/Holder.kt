@@ -1,7 +1,6 @@
 package com.dock.bank.digitalaccount.core.domain
 
 import com.dock.bank.digitalaccount.core.exception.DomainException
-import org.slf4j.LoggerFactory
 import java.util.*
 
 data class Holder (
@@ -10,10 +9,6 @@ data class Holder (
     val name: String
 ) {
 
-    companion object {
-        private val logger = LoggerFactory.getLogger(Holder::class.java)
-    }
-
     fun validateCpf()  {
         if(!validate()) {
             throw DomainException(message = "Holder cpf is not valid.")
@@ -21,7 +16,6 @@ data class Holder (
     }
 
     private fun validate() : Boolean {
-        logger.info("Validating CPF: ${this.cpf} from holder ${this.name}.")
         if (cpf.isEmpty()) return false
 
         val numbers = cpf.filter { it.isDigit() }.map {
