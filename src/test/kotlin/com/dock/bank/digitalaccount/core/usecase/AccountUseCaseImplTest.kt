@@ -8,7 +8,6 @@ import com.dock.bank.digitalaccount.core.port.persistence.AccountPersistence
 import com.dock.bank.digitalaccount.core.port.persistence.HolderPersistence
 import com.dock.bank.digitalaccount.utils.buildAccount
 import com.dock.bank.digitalaccount.utils.buildHolder
-import com.dock.bank.digitalaccount.core.domain.Credentials
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify

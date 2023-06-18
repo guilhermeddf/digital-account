@@ -40,4 +40,5 @@ class SecurityConfiguration(
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
+
 }

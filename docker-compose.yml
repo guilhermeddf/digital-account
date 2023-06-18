@@ -2,28 +2,28 @@ version: "3.4"
 
 services:
 
-  digital-account:
-    image: digital-account-app
-    environment:
-      - Dspring.profiles.active=docker
-    labels:
-      #com.datadoghq.ad.check_names: '[""]'
-      com.datadoghq.ad.init_configs: '[{}]'
-      com.datadoghq.ad.instances: '[{"host":"%%host%%", "port": "%%port%%"}]'
-      com.datadoghq.ad.logs: '[{"source": "digital-account", "service": "digital-account"}]'
-      com.datadoghq.tags.env: 'local'
-      com.datadoghq.tags.service: 'digital-account'
-      com.datadoghq.tags.version: "1"
-    ports:
-      - "8080:8080"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "30m"
-        max-file: "1"
+#  digital-account:
+#    image: digital-account-app
+#    environment:
+#      - Dspring.profiles.active=docker
+#    labels:
+#      #com.datadoghq.ad.check_names: '[""]'
+#      com.datadoghq.ad.init_configs: '[{}]'
+#      com.datadoghq.ad.instances: '[{"host":"%%host%%", "port": "%%port%%"}]'
+#      com.datadoghq.ad.logs: '[{"source": "digital-account", "service": "digital-account"}]'
+#      com.datadoghq.tags.env: 'local'
+#      com.datadoghq.tags.service: 'digital-account'
+#      com.datadoghq.tags.version: "1"
+#    ports:
+#      - "8080:8080"
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "30m"
+#        max-file: "1"
 
   localstack:
-    container_name: aws-stack
+    container_name: aws-container
     image: localstack/localstack
     ports:
       - "4566:4566"
@@ -34,43 +34,23 @@ services:
       - AWS_DEFAULT_OUTPUT=json
       - SERVICES=sqs,cloudwatch
     volumes:
-      - ./cloudformation/template:/cloudformation/template
-      - ./local/aws:/etc/localstack/init/ready.d
+      - ./configuration/cloudformation/template:/cloudformation/template
+      - ./configuration/aws:/etc/localstack/init/ready.d
       - ./var/run/docker.sock:/var/run/docker.sock
 
-  datadog:
-    image: gcr.io/datadoghq/agent:7
-    container_name: dd-agent
-    restart: always
-    environment:
-      - DD_API_KEY=apikey
-      - DD_SITE=us5.datadoghq.com
-      - DD_HOSTNAME=localhost
-      - DD_APM_ENABLED=true
-      - DD_LOGS_ENABLED=true
-      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_CONTAINER_EXCLUDE=image:gcr.io/datadoghq/agent*
-      - DD_CONTAINER_EXCLUDE_METRICS=image:gcr.io/datadoghq/agent*
-      - DD_CONTAINER_EXCLUDE_LOGS=image:gcr.io/datadoghq/agent*
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-      #- /opt/datadog-agent/run:/opt/datadog-agent/run:rw
 
   flyway:
     image: flyway/flyway:7.14-alpine
-    container_name: digital-account-flyway
+    container_name: flyway-container
     command: -url=jdbc:postgresql://postgres:5432/digital-account-service -schemas=digital_account_service -user=digital-account-service-migration -password=digital-account-service-migration migrate
     volumes:
-      - ./src/main/resources/db/migration:/flyway/sql
+      - ./launcher/src/main/resources/migration:/flyway/sql
     depends_on:
       - postgres
 
   postgres:
     image: postgres
-    container_name: digital-account-postgres
+    container_name: postgres-container
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 1s
@@ -79,9 +59,30 @@ services:
     environment:
       POSTGRES_PASSWORD: "mM@md38d23"
     volumes:
-      - ./local/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
+      - ./configuration/postgresql/setup-postgresql-databases.sh:/docker-entrypoint-initdb.d/setup-postgresql-databases.sh
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
+
+#  datadog:
+#    image: gcr.io/datadoghq/agent:7
+#    container_name: dd-agent
+#    restart: always
+#    environment:
+#      - DD_API_KEY=apikey
+#      - DD_SITE=us5.datadoghq.com
+#      - DD_HOSTNAME=localhost
+#      - DD_APM_ENABLED=true
+#      - DD_LOGS_ENABLED=true
+#      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+#      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+#      - DD_CONTAINER_EXCLUDE=image:gcr.io/datadoghq/agent*
+#      - DD_CONTAINER_EXCLUDE_METRICS=image:gcr.io/datadoghq/agent*
+#      - DD_CONTAINER_EXCLUDE_LOGS=image:gcr.io/datadoghq/agent*
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - /proc/:/host/proc/:ro
+#      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+#      #- /opt/datadog-agent/run:/opt/datadog-agent/run:rw
 
 #  zookeeper:
 #    image: confluentinc/cp-zookeeper:latest
@@ -135,7 +136,7 @@ services:
 #    image: prom/prometheus:latest
 #    container_name: prometheus-container
 #    volumes:
-#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#      - ./configuration/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 #      - prometheus_data:/prometheus
 #    networks:
 #      - prometheus
@@ -150,7 +151,7 @@ services:
 #    networks:
 #      - prometheus
 #    volumes:
-#      - ./grafana/provisioning:/etc/grafana/provisioning
+#      - ./configuration/grafana/provisioning:/etc/grafana/provisioning
 #      - grafana_data:/var/lib/grafana
 
 #  fake-service:
@@ -160,7 +161,7 @@ services:
 #      - "3001:3001"
 #    command: -d /data -i 0 -p 3001
 #    volumes:
-#      - ./local/mockoon/data.json:/data
+#      - ./configuration/mockoon/data.json:/data
 
 #  influxdb:
 #    image: influxdb:1.8
@@ -181,14 +182,13 @@ services:
 #    environment:
 #      - K6_OUT=influxdb=http://influxdb:8086/k6
 #    volumes:
-#     - ./loadtest/scripts:/scripts
+#     - ./configuration/k6:/scripts
 #    extra_hosts:
 #      - "host.docker.internal:host-gateway"
 
 networks:
   k6:
   grafana:
-  gitlab:
   prometheus:
     driver: bridge
   broker-kafka:

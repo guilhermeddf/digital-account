@@ -3,9 +3,7 @@ package com.dock.bank.digitalaccount.infra.client
 import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.exceptions.GeneralException
-import com.dock.bank.digitalaccount.core.usecase.AccountGeneratorImpl
-import com.dock.bank.digitalaccount.infra.gateway.AccountGateway
-import com.fasterxml.jackson.databind.ObjectMapper
+
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
@@ -25,8 +23,6 @@ class AccountClientImpl(
     companion object {
         private val logger = LoggerFactory.getLogger(AccountClientImpl::class.java)
     }
-    val URL = "http://localhost:3001"
-    val PATH = "/accounts/"
 
     override fun generateAccount(holder: Holder, auth: String) : ResponseEntity<Account> {
         try {

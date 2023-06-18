@@ -8,7 +8,7 @@ extra["awsVersion"] = "1.12.470"
 extra["cucumberVersion"] = "7.12.1"
 
 plugins {
-	id("org.springframework.boot") version "3.0.6"
+	id("org.springframework.boot") version "3.1.0"
 	id("io.spring.dependency-management") version "1.1.0"
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
@@ -22,6 +22,7 @@ sonarqube {
 		property ("sonar.projectKey", "guilhermeddf_digital-account")
 		property ("sonar.organization", "guilhermeddf")
 		property ("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.junit.reportPaths","${project.projectDir}/build/reports/jacoco/test/")
 	}
 }
 
@@ -72,8 +73,9 @@ dependencies {
 
 	// Kotlin Dependencies
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
 
 	//Logging
 	implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
@@ -83,6 +85,7 @@ dependencies {
 	//Database
 	implementation("org.postgresql:postgresql:42.3.8")
 	implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.1")
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")

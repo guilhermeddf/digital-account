@@ -20,7 +20,6 @@ class AccountController(
     companion object {
         private val logger = LoggerFactory.getLogger(AccountController::class.java)
     }
-
     @PostMapping
     suspend fun create(
         @RequestHeader("holder-cpf") holderCpf: String,
