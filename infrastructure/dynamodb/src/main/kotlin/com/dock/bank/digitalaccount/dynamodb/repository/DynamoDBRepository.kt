@@ -1,14 +1,16 @@
-/* package com.dock.bank.digitalaccount.infra.dynamodb
+package com.dock.bank.digitalaccount.dynamodb.repository
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
+import com.amazonaws.services.dynamodbv2.document.Item
+import com.amazonaws.services.dynamodbv2.document.ItemCollection
+import com.amazonaws.services.dynamodbv2.document.ScanOutcome
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest
 import com.amazonaws.services.dynamodbv2.model.GetItemRequest
+import com.amazonaws.services.dynamodbv2.model.GetItemResult
 import com.amazonaws.services.dynamodbv2.model.PutItemRequest
-import com.dock.bank.digitalaccount.infra.secretsManager.converter.JsonConverter
-import com.dock.bank.digitalaccount.postgresql.model.HolderTable
-import com.dock.bank.digitalaccount.infra.sqs.SQSConsumerImpl
+import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -16,58 +18,53 @@ import java.util.*
 import kotlin.collections.HashMap
 
 @Component
-class DynamoHolderRepository(
+class DynamoDBRepository(
     private val dynamoDB: AmazonDynamoDB,
-    private val jsonConverter: JsonConverter,
     @Value("\${cloud.aws.dynamodb.table-name}") private val tableName: String
 ) {
     companion object {
-        private val logger = LoggerFactory.getLogger(SQSConsumerImpl::class.java)
+        private val logger = LoggerFactory.getLogger(DynamoDBRepository::class.java)
     }
 
-    suspend fun save(holder: HolderTable): HolderTable {
-        val items = HashMap<String, AttributeValue>()
-        items["id"] = AttributeValue(holder.id.toString())
-        items["name"] = AttributeValue(holder.name)
-        items["cpf"] = AttributeValue(holder.cpf)
+    fun saveItem(items: HashMap<String, AttributeValue>) {
 
         val putRequest = PutItemRequest().withTableName(tableName).withItem(items)
 
         try {
             dynamoDB.putItem(putRequest)
-            return holder
+            logger.info("Item saved on dynamodb with success.")
         } catch (e:Exception){
-            throw Exception("Error trying to put item into DynamoDB.", e)
+            throw Exception("Error trying to put item into dynamodb.", e)
         }
     }
 
-    suspend fun findHolderByCpf(holderCpf: String): Optional<HolderTable> {
+    fun getItemByAttributeValue(value: Pair<String, String>): Optional<Item> {
         val database = DynamoDB(dynamoDB)
         val table = database.getTable(tableName)
-
+        val scan = table.scan()
         return try {
-            val scan = table.scan()
-            val result = scan.first { item -> item.get("cpf") == holderCpf}.toJSON()
-            Optional.of(jsonConverter.toHolderTable(result))
+            val response =  scan.first { item -> item.get(value.first) == value.second }
+            Optional.of(response)
         } catch (e: NoSuchElementException) {
             Optional.empty()
         }
     }
 
-    suspend fun existsById(id: UUID): Boolean {
+    fun getItemById(id: UUID): GetItemResult {
         val items = HashMap<String, AttributeValue>()
         items["id"] = AttributeValue(id.toString())
 
         val getRequest = GetItemRequest().withTableName(tableName).withKey(items)
         try {
             val result = dynamoDB.getItem(getRequest)
-            return result.item != null
+            logger.info("Item with id $id was retrieved successfully on dynamodb.")
+            return result
         } catch (e: Exception) {
-            throw Exception("Error trying to get item into DynamoDB.", e)
+            throw Exception("Error trying to get item into Dynamodb.", e)
         }
     }
 
-    suspend fun deleteById(id: UUID) {
+    fun deleteItemById(id: UUID) {
         val items = HashMap<String, AttributeValue>()
         items["id"] = AttributeValue(id.toString())
 
@@ -77,10 +74,19 @@ class DynamoHolderRepository(
 
         try {
             dynamoDB.deleteItem(deleteRequest)
+            logger.info("Item with id $id was deleted successfully on dynamodb.")
         } catch (e: Exception) {
-            throw Exception("Error trying to delete item on dynamoDB.")
+            throw Exception("Error trying to delete item on dynamodb.")
+        }
+    }
+
+    fun getAll(): ItemCollection<ScanOutcome> {
+        val database = DynamoDB(dynamoDB)
+        val table = database.getTable(tableName)
+        return try {
+            table.scan()
+        } catch (e: ResourceNotFoundException) {
+            throw ResourceNotFoundException("Error getting all holders on dynamodb database.")
         }
     }
 }
-
- */

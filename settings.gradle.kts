@@ -2,6 +2,8 @@ rootProject.name = "digital-account"
 
 include("application")
 include("domain")
-include("infrastructure")
-include("configuration")
+
 include("launcher")
+
+include("infrastructure:postgres")
+include("infrastructure:dynamodb")

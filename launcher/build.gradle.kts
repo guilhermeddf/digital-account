@@ -53,7 +53,7 @@ dependencies {
 
     implementation(project(":application"))
     implementation(project(":domain"))
-    implementation(project(":infrastructure"))
+    implementation(project(":infrastructure:postgres"))
 
     // Spring Dependencies
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
@@ -100,7 +100,7 @@ dependencies {
     //implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
     implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
     //implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
-    //implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
+    implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 
     //implementation("org.springframework.kafka:spring-kafka:3.0.7")
 

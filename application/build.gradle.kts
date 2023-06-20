@@ -4,7 +4,7 @@ extra["springBootVersion"] = "3.1.0"
 
 plugins {
     kotlin("jvm") version "1.7.22"
-    //kotlin("plugin.spring") version "1.7.22"
+    kotlin("plugin.spring") version "1.7.22"
     id("jacoco")
 }
 

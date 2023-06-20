@@ -11,7 +11,6 @@ import com.dock.bank.digitalaccount.utils.DateUtils
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
-import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
 @Component
