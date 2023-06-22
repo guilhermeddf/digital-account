@@ -3,21 +3,13 @@ Transform: AWS::Serverless-2016-10-31
 Description: Sample Cloudformation
 
 Parameters:
-  Env:
-    Type: String
-    AllowedValues:
-      - localstack
-      - dev
-      - hml
-      - prd
-    Default: localstack
-
   Service:
     Type: String
     Default: sample-service
 
   Version:
     Type: String
+    Default: 1
 
 Resources:
   SampleS3Storage:

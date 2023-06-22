@@ -6,6 +6,8 @@ import com.dock.bank.digitalaccount.ports.spi.database.AccountDatabasePort
 import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
 import com.dock.bank.digitalaccount.ports.spi.database.TransactionDatabasePort
 import com.dock.bank.digitalaccount.ports.spi.database.UserDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.messaging.HolderMessagingPort
+import com.dock.bank.digitalaccount.ports.spi.messaging.HolderReceiver
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
@@ -30,8 +32,12 @@ class DigitalAccountConfig {
     }
 
     @Bean
-    fun holderServicePort(holderDatabasePort: HolderDatabasePort): HolderServicePort {
-        return HolderServicePortImpl(holderDatabasePort)
+    fun holderServicePort(
+        holderDatabasePort: HolderDatabasePort,
+        holderMessagingPort: HolderMessagingPort,
+        holderReceiver: HolderReceiver
+    ): HolderServicePort {
+        return HolderServicePortImpl(holderDatabasePort, holderMessagingPort, holderReceiver)
     }
 
     @Bean

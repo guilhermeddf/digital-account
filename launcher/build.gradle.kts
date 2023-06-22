@@ -54,6 +54,8 @@ dependencies {
     implementation(project(":application"))
     implementation(project(":domain"))
     implementation(project(":infrastructure:postgres"))
+    implementation(project(":infrastructure:sqs-producer"))
+    implementation(project(":infrastructure:sqs-consumer"))
 
     // Spring Dependencies
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:${property("springBootVersion")}")
@@ -97,9 +99,8 @@ dependencies {
     //implementation("redis.clients:jedis:4.4.0")
 
     //AWS
-    //implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
+    implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
     implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
-    //implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
     implementation("software.amazon.awssdk:sqs:2.20.88")
     implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 

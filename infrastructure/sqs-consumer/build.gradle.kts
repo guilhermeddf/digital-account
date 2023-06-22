@@ -22,6 +22,8 @@ dependencies {
 
     //Spring
     implementation("org.springframework.boot:spring-boot-starter:3.1.0")
+    //implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
+    implementation("io.awspring.cloud:spring-cloud-aws-messaging:2.4.4")
 
     // Kotlin Dependencies
     implementation("org.jetbrains.kotlin:kotlin-reflect")

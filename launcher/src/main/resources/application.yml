@@ -45,8 +45,8 @@ cloud:
     profile: localstack
     sqs:
       end-point:
-        uri: http://localhost:4566/000000000000/process-queue
-        queue-name: process-queue
+        uri: http://localhost:4566/000000000000/sample-queue
+        queue-name: sample-queue
     s3:
       endpoint:
         uri: http://s3.localhost.localstack.cloud:4566/
