@@ -3,7 +3,7 @@ package com.dock.bank.digitalaccount.postgresql.adapter
 import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Transaction
 import com.dock.bank.digitalaccount.core.domain.TransactionType
-import com.dock.bank.digitalaccount.ports.spi.TransactionDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.TransactionDatabasePort
 import com.dock.bank.digitalaccount.postgresql.mapper.toEntity
 import com.dock.bank.digitalaccount.postgresql.mapper.toTable
 import com.dock.bank.digitalaccount.postgresql.repository.PostgresTransactionRepository

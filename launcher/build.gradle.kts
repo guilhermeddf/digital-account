@@ -100,6 +100,7 @@ dependencies {
     //implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.6.RELEASE")
     implementation("com.amazonaws:aws-java-sdk-secretsmanager:${property("awsVersion")}")
     //implementation("com.amazonaws:aws-java-sdk-sqs:${property("awsVersion")}")
+    implementation("software.amazon.awssdk:sqs:2.20.88")
     implementation("com.amazonaws:aws-java-sdk-dynamodb:${property("awsVersion")}")
 
     //implementation("org.springframework.kafka:spring-kafka:3.0.7")

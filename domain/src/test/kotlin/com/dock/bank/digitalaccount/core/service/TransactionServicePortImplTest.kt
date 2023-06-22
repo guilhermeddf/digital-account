@@ -6,8 +6,8 @@ import com.dock.bank.digitalaccount.core.domain.TransactionType
 import com.dock.bank.digitalaccount.core.exception.LimitExceededException
 import com.dock.bank.digitalaccount.core.utils.buildAccount
 import com.dock.bank.digitalaccount.core.utils.buildTransaction
-import com.dock.bank.digitalaccount.ports.spi.AccountDatabasePort
-import com.dock.bank.digitalaccount.ports.spi.TransactionDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.AccountDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.TransactionDatabasePort
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify

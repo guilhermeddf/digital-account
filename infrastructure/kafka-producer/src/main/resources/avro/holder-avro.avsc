@@ -1,0 +1,20 @@
+{
+  "namespace": "com.dock.bank.digitalaccount.schema",
+  "type": "record",
+  "name": "Holder",
+  "version": "1.0.0",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "cpf",
+      "type": "string",
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}

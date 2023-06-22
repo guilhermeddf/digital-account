@@ -5,7 +5,7 @@ import com.dock.bank.digitalaccount.core.exception.GeneralException
 import com.dock.bank.digitalaccount.postgresql.mapper.toEntity
 import com.dock.bank.digitalaccount.postgresql.mapper.toTable
 import com.dock.bank.digitalaccount.postgresql.repository.PostgresHolderRepository
-import com.dock.bank.digitalaccount.ports.spi.HolderDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component

@@ -2,7 +2,10 @@ package com.dock.bank.digitalaccount.configuration
 
 import com.dock.bank.digitalaccount.core.service.*
 import com.dock.bank.digitalaccount.ports.api.*
-import com.dock.bank.digitalaccount.ports.spi.*
+import com.dock.bank.digitalaccount.ports.spi.database.AccountDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.TransactionDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.UserDatabasePort
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration

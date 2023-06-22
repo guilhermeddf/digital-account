@@ -6,8 +6,8 @@ import com.dock.bank.digitalaccount.core.domain.TransactionType
 import com.dock.bank.digitalaccount.core.exception.LimitExceededException
 import com.dock.bank.digitalaccount.core.exception.ResourceNotFoundException
 import com.dock.bank.digitalaccount.ports.api.TransactionServicePort
-import com.dock.bank.digitalaccount.ports.spi.AccountDatabasePort
-import com.dock.bank.digitalaccount.ports.spi.TransactionDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.AccountDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.TransactionDatabasePort
 
 import com.dock.bank.digitalaccount.utils.DateUtils
 import java.time.LocalDate

@@ -5,8 +5,8 @@ import com.dock.bank.digitalaccount.core.domain.Status
 import com.dock.bank.digitalaccount.core.exception.ResourceNotFoundException
 import com.dock.bank.digitalaccount.ports.api.AccountGeneratorServicePort
 import com.dock.bank.digitalaccount.ports.api.AccountServicePort
-import com.dock.bank.digitalaccount.ports.spi.AccountDatabasePort
-import com.dock.bank.digitalaccount.ports.spi.HolderDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.AccountDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
 import java.util.*
 
 class AccountServicePortImpl(

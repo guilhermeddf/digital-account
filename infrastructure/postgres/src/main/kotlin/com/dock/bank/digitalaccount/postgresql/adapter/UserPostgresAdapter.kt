@@ -4,7 +4,7 @@ import com.dock.bank.digitalaccount.core.domain.User
 import com.dock.bank.digitalaccount.postgresql.mapper.toEntity
 import com.dock.bank.digitalaccount.postgresql.mapper.toTable
 import com.dock.bank.digitalaccount.postgresql.repository.PostgresUserRepository
-import com.dock.bank.digitalaccount.ports.spi.UserDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.UserDatabasePort
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component

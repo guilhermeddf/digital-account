@@ -3,7 +3,7 @@ package com.dock.bank.digitalaccount.dynamodb.adapter
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.exception.GeneralException
-import com.dock.bank.digitalaccount.ports.spi.HolderDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
 import com.dock.bank.digitalaccount.dynamodb.repository.DynamoDBRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory

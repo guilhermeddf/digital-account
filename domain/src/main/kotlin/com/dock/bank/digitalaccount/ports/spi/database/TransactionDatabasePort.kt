@@ -1,4 +1,4 @@
-package com.dock.bank.digitalaccount.ports.spi
+package com.dock.bank.digitalaccount.ports.spi.database
 
 import com.dock.bank.digitalaccount.core.domain.Account
 import com.dock.bank.digitalaccount.core.domain.Transaction

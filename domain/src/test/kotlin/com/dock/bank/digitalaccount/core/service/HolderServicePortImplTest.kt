@@ -4,7 +4,7 @@ import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.exception.DomainException
 import com.dock.bank.digitalaccount.core.exception.ResourceAlreadyExistsException
 import com.dock.bank.digitalaccount.core.utils.buildHolder
-import com.dock.bank.digitalaccount.ports.spi.HolderDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify

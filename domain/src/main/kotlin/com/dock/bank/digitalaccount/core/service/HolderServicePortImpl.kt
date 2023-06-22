@@ -4,7 +4,7 @@ import com.dock.bank.digitalaccount.core.domain.Holder
 import com.dock.bank.digitalaccount.core.exception.ResourceAlreadyExistsException
 import com.dock.bank.digitalaccount.core.exception.ResourceNotFoundException
 import com.dock.bank.digitalaccount.ports.api.HolderServicePort
-import com.dock.bank.digitalaccount.ports.spi.HolderDatabasePort
+import com.dock.bank.digitalaccount.ports.spi.database.HolderDatabasePort
 import java.util.*
 
 class HolderServicePortImpl(
